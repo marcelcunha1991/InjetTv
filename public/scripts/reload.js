@@ -1,0 +1,1 @@
+setInterval(function() {window.location.reload()}, document.getElementById('tempo').value);

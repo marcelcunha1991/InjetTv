@@ -1,0 +1,49 @@
+* {
+    box-sizing: border-box;
+}
+html, body {
+    width: 100% !important;
+    height: 100% !important;
+    font-weight: bold;
+}
+header {
+    position: relative;
+    span {
+        font-size: 2.3em;
+    }
+    img {
+        position: absolute;
+        right: 0;
+        top: 0;
+        margin: 25px 25px 0 0;
+    }
+}
+.list {
+    .inline-list {
+        display: inline;
+        margin: 0 15px;
+    }
+}
+.input-field label.active, span {
+    font-size: 1.4rem;
+}
+/* label focus color */
+.input-field input[type=text]:focus + label {
+    color: #000 !important;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus {
+    border-bottom: 1px solid #000 !important;
+    box-shadow: 0 1px 0 0 #000 !important;
+}
+h6 {
+    font-size: 14px;
+    margin-left: -6.5px;
+}
+button h6 {
+    margin-left: -12.5px;
+}
+.light-blue.darken-2.right.btn.waves-effect.waves-light {
+    width: 88.77px;
+    height: 36px;
+}

@@ -1,0 +1,52 @@
+.flex {
+    display: flex;
+    .item {
+        margin: 5px;
+        // background: tomato;
+        text-align: center;
+        font-size: 1.5em;
+        flex: 1;
+    }
+    
+    .grow0 {
+    flex-grow: 0;
+    }
+    .grow1 {
+    flex-grow: 1;
+    }
+}
+
+div.container {
+    font-weight: bold;
+}
+
+.canvas-container {
+    width: 100%;
+    text-align: center;
+}
+
+canvas {
+    display: inline;
+}
+
+// .Gauge {
+//     padding-left: 35px;
+// }
+.speedometer {
+    background-color: #263743;
+    color: white;
+    strong {
+        font-size: 40px;
+    }
+}
+
+table {
+    font-size: 20px;
+}
+
+img {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 25px 25px 0 0;
+}

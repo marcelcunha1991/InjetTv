@@ -1,0 +1,83 @@
+html {
+    width: 100%;
+    height: auto;
+    body {
+        font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+        width: 100%;
+        height: 100%;
+        .painel {
+            position: absolute;
+            padding: 15px;
+            width: 100%;
+            height: 100%;
+            .painel-cont {
+                padding: 25px;
+                width: 100%;
+                height: 100%;
+                .info-line-center {
+                    padding: 0 65px;
+                    margin-bottom: 0 !important;
+                }
+            }
+        }
+        .info-line-line {
+            span {
+                display: inline;
+                font-size: 2.7rem;
+            }
+        }
+        .info-line-box {
+            font-weight: bold;
+            border: 17px solid;
+            label {
+                letter-spacing: 2px;
+                font-size: 2.5rem;
+            }
+            .box {
+                 display: flex;
+                 flex-direction: row;
+                 justify-content: center;
+                 align-items: center;
+                 height: 125px;
+                .item {
+                    width: 100%;
+                    margin: 5px;
+                    text-align: center;
+                    font-size: 7rem;
+                }
+            }
+            .sub-label {
+                font-size: 2rem;
+                height: 1em;
+                justify-content: center;
+            }
+        }
+        .footer, .header {
+            flex: 1 1 auto;
+            font-size: 3.5rem;
+            display: flex;
+            justify-content: space-between;
+            flex-grow: 1;
+            flex-shrink: 1;
+            font-weight: bolder;
+        }
+        .sub-header {
+            font-size: 3.2rem;
+            font-weight: bolder;
+            div {
+                display: inline;
+            }
+        }
+    }
+}
+#header-inf-seg {
+    height: 50px;
+    #info-cdmaquina {
+        font-size: 3.5rem
+    }
+    #inpt-segundos-refresh {
+        div {
+            display: flex;
+        }
+    }
+}

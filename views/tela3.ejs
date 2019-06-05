@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tela 03</title>
+    <meta charset=UTF-8>
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <link rel=stylesheet href=/styles/css/materialize.css />
+    <link rel=stylesheet href=/styles/css/tela3.css />
+    <link href=https://fonts.googleapis.com/icon?family=Material+Icons rel=stylesheet>
+</head>
+<body>
+    <header class="row ">
+        <div class="row">
+            <div class="col s4 center"><span>Acompanhamento de Produção</span></div>
+            <div class="col s4 center"><span>Hoje: 23/07/2008 09:50:06</span></div>
+            <div class="col s4 center"></div>
+        </div>
+        <div class="row">
+            <div class="col s4 center"><span>Célula: 0001 - TODAS AS MAQUINAS</span></div>
+            <div class="col s4 center"><span>Máquina Gargalo: MONTAG</span></div>
+            <div class="col s4 center"><span>Cliente: MONTAGEM</span></div>
+        </div>
+    </header>
+    <main class="row">
+        <div class="row acompanhamento-prod">
+            <!-- Box 1 (Produção em tempo real) -->
+            <div class="col s6 box box-monitor prod-tempo-real">
+                <header class="row center">
+                    <span class="white-text">Produção em tempo real</span>
+                </header>
+                <div class="row cyan lighten-4 info-box-frst">
+                    <div class="row">
+                        <div class="col s4"><span>N° Produto:</span></div>
+                        <div class="col s6"><span>ARTICULAÇÃO DA SUSP</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col s4"><span>Takt Time:</span></div>
+                        <div class="col s6"><span>22s</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col s4"><span>Qtde MOD:</span></div>
+                        <div class="col s6"><span>0 operador(es)</span></div>
+                    </div>
+                </div>
+                <div class="row blue-grey lighten-3 info-box-scnd">
+                    <div class="row">
+                        <div class="col s4"><span>Produção Planejada:</span></div>
+                        <div class="col s6"><span>120</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col s4"><span>Produção Líquida:</span></div>
+                        <div class="col s6"><span>5</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col s4"><span>Diferença:</span></div>
+                        <div class="col s6"><span>115</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col s4"><span>Atendimento:</span></div>
+                        <div class="col s6"><span>4,167%</span></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Box 2 (Status da célula) -->
+            <div class="col s6 box box-monitor status-celula">
+                <header class="row center">
+                    <span class="white-text">Status da célula</span>
+                </header>
+                <div class="row red center info-box-warning"><span class="white-text">PARADA</span></div>
+                <div class="row red center info-box-oee">
+                    <div class="row">
+                        <div class="col s4"><span class="left">OEE:</span></div>
+                        <div class="col s6"><span class="left">1.59%</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col s4"><span class="left">Objetivo:</span></div>
+                        <div class="col s6"><span class="left">61%</span></div>
+                    </div>
+                </div>
+                <div class="row blue-grey lighten-4 center info-box-parada">
+                    <div class="row">
+                        <div class="col s4"><span class="left">Motivo:</span></div>
+                        <div class="col s7"><span class="left">99999999 - PARADA NÃO INFORMADA%</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col s4"><span class="left">Duração Parada:</span></div>
+                        <div class="col s6"><span class="left">14:30:21</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col s4"><span class="left">Início</span></div>
+                        <div class="col s6"><span class="left">4/12/08 3:19 PM</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col s4"><span class="left">Responsável:</span></div>
+                        <div class="col s6"><span class="left">000100 - Produção</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row acompanhamento-prod">
+            <!-- Box 3 (Gráfico de paretto) -->
+            <div class="col s6 box box-monitor paretto-paradas">
+                <header class="row center">
+                    <span class="white-text">Paretto de Paradas VTD TURNO</span>
+                </header>
+                <div class="row info-grafico-paretto">
+                    <img class="responsive-img" src="/img/paretto.png">
+                </div>
+            </div>
+            <!-- Box 4 (Gráfico de paradas) -->
+            <div class="col s6 box box-monitor grafico-paradas-turno">
+                <header class="row center">
+                    <span class="white-text">Gráfico de Paradas TURNO</span>
+                </header>
+                <div class="row info-grafico-pie">
+                    <img class="responsive-img" src="/img/pie.png">
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

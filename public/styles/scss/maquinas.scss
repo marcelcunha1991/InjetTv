@@ -1,0 +1,31 @@
+@import 'variables';
+
+.flex, .descricao {
+    display: flex;
+    .item {
+        margin: 8px;
+        // background: tomato;
+        text-align: center;
+        font-size: 1.8em;
+        flex: 1;
+        text-shadow: 1px 0px 0px black, 
+        -1px 0px 0px black, 
+        0px 1px 0px black, 
+        0px -1px 0px black;
+    }
+    .grow0 {
+        flex-grow: 0;
+    }
+    .grow1 {
+        flex-grow: 1;
+    }
+}
+
+.container {
+    font-size: .85vw;
+}
+span {
+    font-size: 21px;
+    color: black;
+    font-weight: bold;
+}

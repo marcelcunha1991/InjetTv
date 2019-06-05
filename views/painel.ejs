@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset=UTF-8>
+    <meta name=viewport content="width=device-width, initial-scale=1.0">
+    <meta http-equiv=X-UA-Compatible content="ie=edge">
+    <link rel=stylesheet href=/assets/css/materialize.min.css />
+    <link href=https://fonts.googleapis.com/icon?family=Material+Icons rel=stylesheet>
+    <link rel=stylesheet href=/styles/css/painel.css>
+    <link rel=stylesheet href=/styles/css/preloader.css>
+    <title>Injet TV</title>
+</head>
+<body>
+    <%- include('components/preloader'); %>
+    <header class="row center">
+        <span>INJET TV - Painel de Controle</span>
+        <img src="<%=logo%>" alt=Logo width=100 height=100>
+    </header>
+    <main class=container>
+        <form class="col s12" action="<%=configPath%>/painel/config" method=POST enctype=multipart/form-data>
+            <div class=row>
+                <div class="col s12">
+                    <span>Mostrar Telas</span>
+                </div>
+            </div>
+            <div class=row>
+                <div class="col xl12 list">
+                    <p class=inline-list>
+                        <label>
+                            <input name=painelProdutividade type=checkbox id=painelProdutividade checked>
+                            <span>Produtividade</span>
+                        </label>
+                    </p>
+                    <p class=inline-list>
+                        <label>
+                            <input name=painelMaquinas type=checkbox id=painelMaquinas>
+                            <span>Máquinas</span>
+                        </label>
+                    </p>
+                    <p class=inline-list>
+                        <label>
+                            <input name=painelParadas type=checkbox id=painelParadas>
+                            <span>Paradas</span>
+                        </label>
+                    </p>
+                </div>
+            </div>
+            <div class=row>
+                <div class="input-field col xl12">
+                    <input placeholder="Tempo de transição da tela, em segundos." type=number id=tempo_trans name=tempo_trans pattern=\d*>
+                    <label for=tempo_trans>Tempo de Transição</label>
+                </div>
+            </div>
+            <div class=row>
+                <div class="input-field col xl12">
+                    <span>Cor de Fundo</span>
+                    <input type=color id=cor_fundo value=#ffffff name=cor_fundo>
+                    <button id=btn-cor type=button class="light-blue darken-2 right btn">Aplicar</button>
+                </div>
+            </div>
+            <div class=row>
+                <div class="input-field col xl6">
+                    <select id=galpao name=galpao>
+                        <option value="" disabled selected>Escolha o Grupo de Trabalho</option>
+                        <% gts.forEach(function(gt) { %>
+                            <option value="<%=gt.cdGt%>"><%=gt.dsGt%></option>
+                        <% }); %>
+                    </select>
+                    <label>Grupo de Máquinas</label>
+                </div>
+                <div class="input-field col xl6">
+                    <select id=maquinas name=maquinas multiple>
+                        <option value="" disabled>Escolha as Máquinas</option>
+                    </select>
+                    <label>Máquinas</label>
+                </div>
+            </div>
+            <span>Carregar Logo da Empresa</span>
+            <div class="file-field input-field">
+                <div class="light-blue darken-2 right btn waves-effect waves-light">
+                    <h6>Carregar</h6>
+                    <input name=imagem id=imagem type=file>
+                </div>
+                <div class=file-path-wrapper>
+                    <input id=path_logo name=path_logo placeholder="Carregar logo da empresa." class="file-path validate" type=text>
+                </div>
+            </div>
+            <button class="light-blue darken-2 right btn waves-effect waves-light" type=submit id=enviar name=enviar><h6>Continuar</h6></button>
+        </form>
+    </main>
+    <script src=/assets/jquery.min.js></script>
+    <script src=/assets/js/materialize.min.js></script>
+    <script src=/assets/axios.min.js></script>
+    <script src=/lib/throttle-debounce.js></script>
+    <script src=/scripts/painel.js></script>
+</body>
+</html>

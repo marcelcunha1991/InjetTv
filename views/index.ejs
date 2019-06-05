@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>InjetSmartTVWeb - <%= version %></title>
+        <link rel=stylesheet href=/styles/css/materialize.css />
+        <link rel=stylesheet href=/styles/css/style.css />
+    </head>
+    <body>
+        <input type=hidden id=tempo value="<%=tempo%>">
+        <main>
+            <div class="painel blue">
+                <div class="painel-cont white">
+                    <div class=row>
+                        <div id="header-inf-seg" class="col s12 m12 l12 xl12 header">
+                            <div id="info-cdmaquina" class="black-text">
+                                OP: <%= op %>
+                            </div>
+                            <div>
+                                <span>PEÇAS PRODUZIDAS:</span>
+                                <span><%= producaoPlanejada %> / <%= producaoLiquida %></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=row> 
+                        <div class="col s12 m12 l12 xl12 sub-header">
+                            <div>
+                                <span>OPERADOR:</span>
+                                <span id=op><%= cdOperador %> - <%= nmOperador %>,</span>
+                            </div>
+                            <div>
+                                <span>logado desde </span>
+                                <span><%= dtHrLoginOperador %></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row info-line-center">
+                        <div class=row>
+                            <div class="col s12 m5 l5 xl5 info-line-box">
+                                <label class="black-text">MTBF(MIN)</label>
+                                <div class=row>
+                                    <div class=box>
+                                        <div class=item><%= mtbf %></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m5 l5 xl5 offset-m2 offset-l2 offset-xl2 info-line-box">
+                                <label class="black-text">MTTR(MIN)</label>
+                                <div class=row>
+                                    <div class=box>
+                                        <div class=item><%= mttr %></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=row>
+                            <div class="col s12 m5 l5 xl5 info-line-box" style="border-color: <%= corOEE %>;">
+                                <label class="black-text">% OEE (OP)</label>
+                                <div class=row>
+                                    <div class=box>
+                                        <div class="item black-text"><%= oee %></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m5 l5 xl5 offset-m2 offset-l2 offset-xl2 info-line-box" style="border-color: <%= corRefugo %>;">
+                                <label class=black-text>% REFUGOS</label>
+                                <div class=row>
+                                    <div class=box>
+                                        <div class="col s12 item black-text"><%= refugos %></div>
+                                    </div>
+                                    <div class="center black-text sub-label"><%= producaoRefugada %> unidades refugadas / 30 min</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=row> 
+                        <div class="col s12 m12 l12 xl12 red-text footer">
+                            <div>
+                                <span><%= tipoRodape %></span>
+                                <span><%= descricaoRodape %></span>
+                            </div>
+                            <div>
+                                <span><%= dataRodape %></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script src=/lib/jquery.js></script>
+        <script src=/scripts/reload.js></script>
+    </body>
+</html>

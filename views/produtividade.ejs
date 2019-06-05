@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang=en>
+    <head>
+        <title>InjetTV - Produtividade Planta</title>
+        <meta charset=UTF-8>
+        <meta name=viewport content="width=device-width, initial-scale=1">
+        <link rel=stylesheet href=/assets/css/materialize.min.css />
+        <link rel=stylesheet href=/styles/css/produtividade.css />
+        <link href=https://fonts.googleapis.com/icon?family=Material+Icons rel=stylesheet>
+        <script>
+            let secondsTransition = '<%=secondsTransition%>';
+            let nextPage = '<%=nextPage%>';
+        </script>
+    </head>
+    <body style="background-color: <%=cor_fundo%>">
+        <img src="<%=logo%>" alt=logo width=100 height=100>
+        <main>
+            <div class=row>
+                <h1 class=center-align>Produtividade <span id=galpao></span></h1>
+                <div>
+                    <div class="row speedometer">
+                        <div class="col l4">
+                            <div class=row></div>
+                            <div class=row></div>
+                            <div class=row></div>
+                            <div class="row flex center-align">
+                                <div class=canvas-container>
+                                    <canvas class=Gauge id=eficiencia></canvas>
+                                </div>
+                            </div>
+                            <div class="row center-align">
+                                <strong>Eficiência (<span id=eficienciaValue><%=velocimetro.indicadores.eficiencia%></span>)</strong>
+                            </div>
+                        </div>
+                        <div class="col l4">
+                            <div class=row></div>
+                            <div class=row></div>
+                            <div class=row></div>
+                            <div class="row flex">
+                                <div class=canvas-container>
+                                    <canvas class=Gauge id=oee></canvas>
+                                </div>
+                            </div>
+                            <div class="row center-align">
+                                <strong>OEE (<span id=oeeValue><%=velocimetro.indicadores.indOEE%></span>)</strong>
+                            </div>
+                        </div>
+                        <div class="col l4">
+                            <div class=row></div>
+                            <div class=row></div>
+                            <div class=row></div>
+                            <div class="row flex">
+                                <div class=canvas-container>
+                                    <canvas class=Gauge id=utilizacao></canvas>
+                                </div>
+                            </div>
+                            <div class="row center-align">
+                                <strong>Utilização (<span id=utilizacaoValue><%=velocimetro.indicadores.indUtilizacao%></span>)</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col l12">
+                        <div class=row>
+                            <table class="centered striped">
+                                <thead>
+                                    <th></th>
+                                    <% turnos.forEach(function(turno){ %>
+                                        <th><%=turno.dsTurno%></th>
+                                    <% }); %>
+                                    <th>Acumulado mês</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Produtividade OEE</td>
+                                        <% bi.indicadoresTurno.forEach(function(indicadoresTurno){ %>
+                                            <td><%=indicadoresTurno.indicadores.indOEE%>%</td>
+                                        <% }); %>
+                                        <td><%=bi.indicadores.indOEE%>%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Eficiência</td>
+                                        <% bi.indicadoresTurno.forEach(function(indicadoresTurno){ %>
+                                            <td><%=indicadoresTurno.indicadores.eficiencia%>%</td>
+                                        <% }); %>
+                                        <td><%=bi.indicadores.eficiencia%>%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Utilização</td>
+                                        <% bi.indicadoresTurno.forEach(function(indicadoresTurno){ %>
+                                            <td><%=indicadoresTurno.indicadores.indUtilizacao%>%</td>
+                                        <% }); %>
+                                        <td><%=bi.indicadores.indUtilizacao%>%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script src=/assets/jquery.min.js></script>
+        <script src=/lib/gauge.js></script>
+        <script src=/scripts/gauge.js></script>
+    </body>
+</html>
