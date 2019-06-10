@@ -28,6 +28,10 @@ var speeds = [
     {
         id: 'utilizacao',
         value: $('#utilizacaoValue').text()
+    },
+    {
+        id: 'refugo',
+        value: $('#refugoValue').text()
     }
 ];
 

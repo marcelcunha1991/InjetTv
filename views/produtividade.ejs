@@ -100,7 +100,7 @@
                 <h1 class=center-align>Produtividade <span id=galpao></span></h1>
                 <div>
                     <div class="row speedometer">
-                        <div class="col l4">
+                        <div class="col l3">
                             <div class=row></div>
                             <div class=row></div>
                             <div class=row></div>
@@ -113,7 +113,7 @@
                                 <strong>Eficiência (<span id=eficienciaValue><%=velocimetro.indicadores.eficiencia%></span>)</strong>
                             </div>
                         </div>
-                        <div class="col l4">
+                        <div class="col l3">
                             <div class=row></div>
                             <div class=row></div>
                             <div class=row></div>
@@ -126,7 +126,7 @@
                                 <strong>OEE (<span id=oeeValue><%=velocimetro.indicadores.indOEE%></span>)</strong>
                             </div>
                         </div>
-                        <div class="col l4">
+                        <div class="col l3">
                             <div class=row></div>
                             <div class=row></div>
                             <div class=row></div>
@@ -137,6 +137,19 @@
                             </div>
                             <div class="row center-align">
                                 <strong>Utilização (<span id=utilizacaoValue><%=velocimetro.indicadores.indUtilizacao%></span>)</strong>
+                            </div>
+                        </div>
+                        <div class="col l3">
+                            <div class=row></div>
+                            <div class=row></div>
+                            <div class=row></div>
+                            <div class="row flex">
+                                <div class=canvas-container>
+                                    <canvas class=Gauge id=refugo></canvas>
+                                </div>
+                            </div>
+                            <div class="row center-align">
+                                <strong>Refugo (<span id=refugoValue><%=velocimetro.indicadores.indRef%></span>)</strong>
                             </div>
                         </div>
                     </div>
@@ -171,6 +184,13 @@
                                             <td><%=indicadoresTurno.indicadores.indUtilizacao%>%</td>
                                         <% }); %>
                                         <td><%=bi.indicadores.indUtilizacao%>%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Refugo</td>
+                                        <% bi.indicadoresTurno.forEach(function(indicadoresTurno){ %>
+                                            <td><%=indicadoresTurno.indicadores.indRef%>%</td>
+                                        <% }); %>
+                                        <td><%=bi.indicadores.indRef%>%</td>
                                     </tr>
                                 </tbody>
                             </table>
