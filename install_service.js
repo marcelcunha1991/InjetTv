@@ -1,11 +1,13 @@
-require('dotenv').config();
+var Service = require('node-windows').Service;
 
-const Service = require('node-windows').Service,
-    svc = new Service({
-        name:'SmartTV Injet',
-        description: 'Dashboard que exibe os indicadores',
-        script: process.env.BIN_PATH
-    });
-svc
-.on('install',() => svc.start())
-.install();
+var svc = new Service({
+  name:'InjetTv Web',
+  description: 'Dashboard do InjetTv-Web',
+  script: 'C:\\domains\\sitenodejs\\bin\\www'
+});
+
+svc.on('install',function(){
+  svc.start();
+});
+
+svc.install();
