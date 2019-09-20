@@ -25,3 +25,12 @@ setInterval(function() {
         window.location.replace(`/${nextPage}`);
     }
 }, secondsTransition);
+$('form').submit(e => e.preventDefault());
+$('#circle').change(e => {
+    var valor = $("input[name='group1']:checked").val();
+    console.log(valor)
+    if(valor == 0){
+        $('#circle1').attr(`
+        `)
+    }
+});

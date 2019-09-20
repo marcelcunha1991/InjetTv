@@ -24,11 +24,34 @@
         <main>
             <div class=row>
                 <div class=row>
-                    <div class="col s12">
+                    <div class="col s5">
                         <span>Mostrar Grupo/Máquinas</span>
                     </div>
+                    <!-- <div class="col s7">
+                            <form id=circle action="circle">
+                                
+                                    <p id=option>
+                                        <label>
+                                            <input name="group1" type="radio" id=0 value=0 />
+                                            <span>Menor</span>
+                                        </label>
+                                        <label>
+                                            <input name="group1" type="radio" id=1 value=1 />
+                                            <span>Pequeno</span>
+                                        </label>
+                                        <label>
+                                            <input name="group1" value=2 id=2 type="radio"  />
+                                            <span>Médio</span>
+                                        </label>
+                                        <label>
+                                            <input name="group1" type="radio" id=3 value=3 />
+                                            <span>Grande</span>
+                                        </label>
+                                    </p>
+                            </form>
+                    </div> -->
                 </div>
-                <h1 class=center-align>Performance Máquinas</h1>
+                <h3 class=center-align>Performance Máquinas</h3>
                 <div class=container>
                     <div class="col l12">
                         <div class="descricao row valign-wrapper">
@@ -47,12 +70,12 @@
                             </div>
                         </div>
                         <% pts.forEach((pt) => { %>
-                            <div class="row valign-wrapper flex">
-                                <div class="item flex-item-1 grow0">
-                                    <i class="large material-icons" style='color: <%= pt.icone.caminhoIcone %>'>lens</i>
+                            <div class="row valign-wrapper flex" id=circle1>
+                                <div class="item flex-item-1 grow0" >
+                                    <i class="material-icons" style='color: <%= pt.icone.caminhoIcone %>'>lens</i>
                                 </div>
                                 <div class="item flex-item-1 grow0">
-                                    <i class="large material-icons" style='color: <%= pt.icone.corTriangulo %>'>lens</i>
+                                    <i class="material-icons" style='color: <%= pt.icone.corTriangulo %>'>lens</i>
                                 </div>
                                 <div class="item flex-item-1" style="color: <%= pt.icone.caminhoIcone %>">
                                     <%= pt.cdPt %>
