@@ -2,7 +2,7 @@ const moment = require('moment');
 
 module.exports = {
     getYear: data => new Date(data).getFullYear(),
-    getMonth: data => (data.getMonth() >= 0 && data.getMonth() <= 9) ? `0${data.getMonth() + 1}` : data.getMonth() + 1,
+    getMonth: data => (data.getMonth() >= 0 && data.getMonth() <= 9) ? `${data.getMonth() + 1}` : data.getMonth() + 1,
     day: date => (date.getDate() >= 1 && date.getDate() <= 9) ? `0${date.getDate()}` : date.getDate(),
     formated: date => {
         let dataAtual = new Date().toLocaleString(),

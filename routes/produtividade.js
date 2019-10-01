@@ -26,7 +26,7 @@ router
                 anoFim: data.getYear(new Date()),
                 mesFim: data.getMonth(new Date()),
                 cdGalpao: request.session.cfg.galpao,
-                agrupamentoBI: 1
+                agrupamentoBI: 1,
             }),
             axios.get(`${process.env.API_URL}/idw/rest/injet/monitorizacao/turnos`)
         ])
