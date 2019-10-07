@@ -52,7 +52,7 @@ speeds.forEach(speed => {
         limitMin: false,     // If true, the min value of the gauge will be fixed
         generateGradient: true,
         highDpiSupport: true,     // High resolution support
-        percentColors: [[0.0, "#FD3939" ], [0.50, "#9FFF2E"], [1.0, "#5CFFD3"]],
+        percentColors: [[0.0, "#FF0000" ], [0.50, "#FFFF00"], [1.0, "#39ff14"]],
         staticLabels: {
             font: '20px sans-serif',
             labels: [50, 100],
