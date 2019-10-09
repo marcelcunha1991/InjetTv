@@ -27,7 +27,7 @@
         "node-sass-middleware": "0.11.0",
         "node-windows": "^0.1.14"
     },
-    "repository": "http://suporte.maptechnology.com.br:84/maptechnology/injetsmarttvweb.git",
-    "author": "<matheusbzevedo@gmail.com>",
+    "repository": "https://github.com/Carlosfne/InjetTv",
+    "author": "<matheusbzevedo@gmail.com> e <carlosfne@gmail.com>",
     "license": "MIT"
 }
