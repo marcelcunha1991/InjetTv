@@ -19,16 +19,12 @@ router
             console.log('File uploaded!');
         });
     }
-    
+        
     request.session.paineis = panel.selected(request.body);
     request.session.cfg = request.body;
     request.session.cfg.logo = logo.hasLogo();
     request.session.cfg.tempo_trans = time.getTime(request.body.tempo_trans);
 
-    delete request.session.cfg.painelProdutividade;
-    delete request.session.cfg.painelMaquinas;
-    delete request.session.cfg.painelParadas;
-    delete request.session.cfg.path_logo;
 
     if(request.session.paineis.produtividade == true)
         response.redirect('/produtividade');
@@ -36,6 +32,12 @@ router
         response.redirect('/maquinas');
     else
         response.redirect('/paradas');
-});
+    axios.get(request.session.paineis)
+    .then(paineis => 
+        response.status(200).render('painel', 
+        {
+        }))
+        console.log(paineis)
+})
 
 module.exports = router;

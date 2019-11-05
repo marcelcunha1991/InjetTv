@@ -26,11 +26,18 @@
                 };
             }
         </script>
+        
     </head>
     <body style="background-color: <%=cor_fundo%>">
             <img src="<%=logo%>" alt=logo width=100 height=100>
             <main>
                 <div class=row>
+                    <div class="col s1">
+                            <button class="light-blue darken-2 right btn waves-effect waves-light"id=clear>
+                                <i class="material-icons">clear</i>                                
+                                <i class="material-icons">home</i>
+                            </button>
+                    </div>
                     <!-- <div id=time class="centered">
                         <div class="row">
                             <div class="container">
@@ -201,5 +208,6 @@
         <script src=/assets/jquery.min.js></script>
         <script src=/lib/gauge.js></script>
         <script src=/scripts/gauge.js></script>
+        <script src=/scripts/clear.js></script>
     </body>
 </html>

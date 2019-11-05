@@ -10,14 +10,17 @@
     <link rel=stylesheet href=/styles/css/preloader.css>
     <title>Injet TV</title>
 </head>
-<body>
+<script>
+    
+</script>
+<body >
     <%- include('components/preloader'); %>
     <header class="row center">
         <span>INJET TV - Painel de Controle</span>
         <img src="<%=logo%>" alt=Logo >
     </header>
     <main class=container>
-        <form class="col s12" action="<%=configPath%>/painel/config" method=POST enctype=multipart/form-data>
+        <form id="ok" class="col s12" action="<%=configPath%>/painel/config" method=POST enctype=multipart/form-data>
             <div class=row>
                 <div class="col s12">
                     <span>Mostrar Telas</span>
@@ -27,19 +30,19 @@
                 <div class="col xl12 list">
                     <p class=inline-list>
                         <label>
-                            <input name=painelProdutividade type=checkbox id=painelProdutividade checked>
+                            <input name=painelProdutividade type=checkbox id=painelProdutividade >
                             <span>Produtividade</span>
                         </label>
                     </p>
                     <p class=inline-list>
                         <label>
-                            <input name=painelMaquinas type=checkbox id=painelMaquinas>
+                            <input name=painelMaquinas type=checkbox id=painelMaquinas >
                             <span>Máquinas</span>
                         </label>
                     </p>
                     <p class=inline-list>
                         <label>
-                            <input name=painelParadas type=checkbox id=painelParadas>
+                            <input name=painelParadas type=checkbox id=painelParadas >
                             <span>Paradas</span>
                         </label>
                     </p>
@@ -59,7 +62,7 @@
                     <select id=galpao name=galpao>
                         <option value="" disabled selected>Escolha o Grupo de Trabalho</option>
                         <% gts.forEach(function(gt) { %>
-                            <option value="<%=gt.cdGt%>"><%=gt.dsGt%></option>
+                            <option value="<%=gt.cdGt%>" name="<%=gt.dsGt%>"><%=gt.dsGt%></option>
                         <% }); %>
                     </select>
                     <label>Grupo de Máquinas</label>

@@ -1,31 +1,97 @@
 $(() => $('select').formSelect());
+if (localStorage.getItem('cliente')) {
+    console.log(JSON.parse(localStorage.getItem('cliente')).maquinas );
+    if(JSON.parse(localStorage.getItem('cliente')).maquinas == true){
+        $("#painelMaquinas").prop('checked', true);
+    }else{
+        $("#painelMaquinas").prop('checked',false)
+    }
+    if(JSON.parse(localStorage.getItem('cliente')).produtividade == true){
+        $("#painelProdutividade").prop('checked', true);
+    }else{
+        $("#painelProdutividade").prop('checked',false)
+    }
+    if(JSON.parse(localStorage.getItem('cliente')).paradas == true){
+        $("#painelParadas").prop('checked', true);
+    }else{
+        $("#painelParadas").prop('checked',false)
+    }
+    
+    $('#galpao').val(JSON.parse(localStorage.getItem('cliente')).galpao)
+    $('#preloader').fadeIn().toggleClass('hide');
+    $('form').unbind('submit').submit();
 
-$('form').submit(function(event) {
+} else {
+    // $('form').ready(function (event) {
+    //     if (localStorage.getItem('cliente')) {
+    //         if (!$('#painelProdutividade').is(':checked') && !$('#painelMaquinas').is(':checked') && !$('#painelParadas').is(':checked'))
+    //             M.toast({ html: 'Por favor, selecione alguma das opções para exibir o painel!', displayLength: 2000 });
+    //         else {
+    //             // $('#preloader').fadeIn().toggleClass('hide');
+    //             // $('form').unbind('submit').submit();
+    //         };
+    //     } else
+    //         M.toast({ html: 'Por favor, um grupo de trabalho para continuar!', displayLength: 2000 });
+    // });
+}
+
+
+$('form').submit(function (event) {
     event.preventDefault();
-    if($('#galpao').val() !== null) {
-        if(!$('#painelProdutividade').is(':checked') && !$('#painelMaquinas').is(':checked') && !$('#painelParadas').is(':checked'))
-            M.toast({html: 'Por favor, selecione ao menos um painel para exibir!', displayLength: 2000});
+    if ($('#galpao').val() !== null) {
+        if (!$('#painelProdutividade').is(':checked') && !$('#painelMaquinas').is(':checked') && !$('#painelParadas').is(':checked'))
+            M.toast({ html: 'Por favor, selecione ao menos um painel para exibir!', displayLength: 2000 });
         else {
             $('#preloader').fadeIn().toggleClass('hide');
             $(this).unbind('submit').submit();
         };
     } else
-        M.toast({html: 'Por favor, um grupo de trabalho para continuar!', displayLength: 2000});
+        M.toast({ html: 'Por favor, um grupo de trabalho para continuar!', displayLength: 2000 });
 });
 
 
 $('#galpao').change(e => {
-    localStorage.setItem('galpao', $('#galpao option:selected').text());
+
+    var galpaoTemp;
+    var produtividadeTemp;
+    var maquinasTemp;
+    var paradasTemp;
+
+    galpaoTemp = $('#galpao').val();
+    produtividadeTemp = $('#painelProdutividade').val();
+    maquinasTemp = $('#painelMaquinas').val();
+    paradasTemp = $('#painelParadas').val();
+
     $('#preloader').fadeIn().toggleClass('hide');
+
     axios.post('/maquinas/search', {
-        galpao: $('#galpao').val(),
+        galpao: galpaoTemp,
+        produtividade: produtividadeTemp,
+        maquinas: maquinasTemp,
+        paradas: paradasTemp,
+
     })
-    .then(response => {
-        $('#preloader').fadeOut().toggleClass('hide');
-        response.data.forEach(pt => $('#maquinas').append(`<option value='${pt.cdPt}'>${pt.cdPt}</option>`));
-        $('select').formSelect();
-    })
-    .catch(error => M.toast({html: 'Falha ao carregar máquinas, tente novamente mais tarde. ' + error, displayLength: 2000}));
+        .then(response => {
+            $('#preloader').fadeOut().toggleClass('hide');
+            response.data.forEach(pt => $('#maquinas').append(`<option value='${pt.cdPt}'>${pt.cdPt}</option>`));
+            $('select').formSelect();
+        })
+        .catch(error => M.toast({ html: 'Falha ao carregar máquinas, tente novamente mais tarde. ' + error, displayLength: 2000 }));
+        
+        var cliente = {
+        galpao: $("#galpao").val(),
+        produtividade: $('#painelProdutividade').is(':checked'),
+        maquinas: $('#painelMaquinas').is(':checked'),
+        paradas: $("#painelParadas").is(':checked'),
+        cor_fundo: '#ffffff',
+        path_logo: ''
+    };
+   
+    localStorage.setItem("cliente", JSON.stringify(cliente));
+    console.log(cliente);
+    return true;
+
+
 });
 
 $('#btn-cor').click(() => $('body').css('background-color', $('#cor_fundo').val()));

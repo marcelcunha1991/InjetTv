@@ -7,7 +7,7 @@ const express = require('express'),
 router.get('/', (req, res, next) => {
     const ipClient = req.ip.replace(/::f+:/i, ''),
         cdMaquina = req.query.cdpt || '';
-    
+    console.log(ipClient)
     axios({
         method: 'post',
         url: `${process.env.APP_URL}/idw/rest/injet/monitorizacao/injetsmarttvweb`,

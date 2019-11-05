@@ -1,6 +1,6 @@
 
 const maquinas = $('.flex');
-const itemsPerView = 6;
+const itemsPerView = 5;
 let index = 0;
 
 for (let i = 0; i < maquinas.length; i++) {

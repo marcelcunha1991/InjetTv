@@ -1,11 +1,13 @@
 module.exports = {
     verify: (request, response, next) => {
+        
         if(request.body.paineis.produtividade || request.body.paineis.detalhe || request.body.paineis.maquinas)
-            next();
+        next();
         else
-            response.status(500).send('Escolha pelo menos uma tela para prosseguir!');
+        response.status(500).send('Escolha pelo menos uma tela para prosseguir!');
     },
     hasConfig: (request, response, next) => {
+        console.log(localStorage.getItem('cliente'))
         if(request.session.config) next();
         else response.redirect('/painel');
     },
