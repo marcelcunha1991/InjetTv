@@ -1,0 +1,24 @@
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<style>
+    #footer {        
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        left: 0px;
+        height: 50px; 
+    }
+</style>
+<div id=footer>
+    <p class="center-align" style="color: rgba(80, 79, 79, 0.466)">Injet TV Versão.1.0.0</p> 
+</div>
+<script>
+    $(document).ready(function(){
+    var footer_height=$("#footer").height();
+    console.log($("#footer").height())
+    $("#wrapper").css({
+        'padding-bottom' : footer_height
+    });
+});
+</script>
