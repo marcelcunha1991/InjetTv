@@ -37,15 +37,19 @@ router.get('/', (request, response, next) => {
                 listaFiltroPosto
             })
             .then(detalheLista => {
+                console.log(detalheLista)
                 for (let i = 0; i < detalheLista.data.length; i++) {
-                    if (detalheLista.data[i].paradaResumo.dataInicio !== '') {
+                    if(detalheLista == null){
+                        console.log('Fui')
+                    }
+                    else{ if(detalheLista.data[i].paradaResumo.dataInicio !== '') {
                         parada.push({
                             cdPt: detalheLista.data[i].cdPt,
                             tempo: data.dhms(`${detalheLista.data[i].paradaResumo.dataInicio} ${detalheLista.data[i].paradaResumo.horaInicio}`),
                             descricao: detalheLista.data[i].paradaResumo.ultimaParada,
                             cor: '#ff0000'
                         });
-                    }
+                    }}
 
                     if (detalheLista.data[i].alertas != '' && detalheLista.data[i].alertas[detalheLista.data[i].alertas.length - 1].dtHrFim == '') {
                         alerta.push({

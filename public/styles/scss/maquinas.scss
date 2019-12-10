@@ -13,6 +13,10 @@
         0px 1px 0px black, 
         0px -1px 0px black;
     }
+    .descricao {
+        align-items: center;
+        flex:2;        
+    }
     .grow0 {
         flex-grow: 0;
     }
@@ -20,12 +24,12 @@
         flex-grow: 1;
     }
 }
-.redux{
-    max-width: 14ch;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
+// .redux{
+//     max-width: 14ch;
+//     overflow: hidden;
+//     text-overflow: ellipsis;
+//     white-space: nowrap;
+// }
 .container {
     font-size: .85vw;
 }
@@ -45,7 +49,7 @@ span {
     font-family: 'Material Icons';
     font-weight: normal;
     font-style: normal;
-    font-size: 24px;
+    font-size: 65px;
     line-height: 1;
     letter-spacing: normal;
     text-transform: none;
@@ -56,7 +60,7 @@ span {
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
   }
-@media(max-width: 641px) {
+@media(max-height: 480px) and (max-width:640px){
     img{
         width: 50px;
         height: 50px;
@@ -69,67 +73,112 @@ span {
         
     }
     .material-icons{
-        font-size:12px;
+        font-size:30px;
     }
     div.item.flex-item-1{
-        font-size:10px;
-        margin-right: 60px;
+        font-size:11px;
+        margin-right: 55px;
         margin-bottom: -10px;
     }
-}
-@media(max-width: 700px)and(max-heigth : 640px){
-      .material-icons{
-          font-size:20px;
-      }
-}
-@media(min-width: 701px) and (max-width:798px) {
-    .material-icons{
-        font-size:40px;
+    div.item.flex-item-1 i {
+        margin-right: -40px;
     }
 }
-@media(min-width: 799px)and (max-width:800px) {
+@media(min-width: 641px)and(max-width: 800px ){
     img{
-        width: 50px;
-        height: 50px;
+        width: 75px;
+        height: 75px;
     }
     span{
         font-size: 14px;
     }
     h3{
-        font-size: 15px;
+        font-size: 16px;
+        margin-bottom: 0;
         
     }
-    div.item.flex-item-1{
-        font-size:10px;
-        margin-right: 120px;
-        margin-bottom: -10px;
-    }
     .material-icons{
-        font-size:10px;
+        font-size:35px;
+    }
+    div.item.flex-item-1{
+        font-size:14px;
+        margin-right: 85px;
+        margin-bottom: -20px;
+    }
+    div.item.flex-item-1 i {
+        margin-right: -40px;
     }
 }
-@media(min-width: 801px) {
+@media(min-width: 801px)and(max-width: 854px ){
+    img{
+        width: 75px;
+        height: 75px;
+    }
+    span{
+        font-size: 14px;
+    }
+    h3{
+        font-size: 16px;
+        margin-bottom: 0;
+        
+    }
+    .material-icons{
+        font-size:40px;
+    }
+    div.item.flex-item-1{
+        font-size:14px;
+        margin-right: 85px;
+        margin-bottom: -20px;
+    }
+    div.item.flex-item-1 i {
+        margin-right: -40px;
+    } 
+}
+@media(min-height: 481px)and(max-height: 640px ){
+    img{
+        width: 75px;
+        height: 75px;
+    }
+    span{
+        font-size: 16px;
+    }
+    h3{
+        font-size: 18px;
+        margin-bottom: -10;        
+    }
+    .material-icons{
+        font-size:45px;
+    }
+    div.item.flex-item-1{
+        font-size:25px;
+        margin-right: 85px;
+        margin-bottom: -20px;
+    }
+    div.item.flex-item-1 i {
+        margin-right: -40px;
+    } 
+}
+@media(min-height: 641px)and(max-height: 750px ){
+    img{
+        width: 85px;
+        height: 85px;
+    }
+    span{
+        font-size: 16px;
+    }
+    h3{
+        font-size: 20px;
+        margin-bottom: -10;        
+    }
     .material-icons{
         font-size:50px;
     }
-}
-@media(min-width: 1025px)and (max-width:1599px){
-    .material-icons{
-        font-size:80px;
+    div.item.flex-item-1{
+        font-size:20px;
+        margin-right: 85px;
+        margin-bottom: -20px;
     }
-}
-@media(min-width: 1600px) and (max-width:1799px) {
-    .material-icons{
-        font-size:100px;
-    }
-}
-@media(min-width: 1800px){
-    .material-icons{
-        font-size:120px;
-    }
-}
-@media(min-width: 1900px){
-    .material-icons{
-        font-size:100px;
-    }
+    div.item.flex-item-1 i {
+        margin-right: -40px;
+    } 
 }

@@ -79,3 +79,259 @@ img {
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
   }
+  @media(max-height: 480px)and(max-width: 640px ){
+    img{
+        margin-top: 0;
+        width: 50px;
+        height: 50px;
+    }
+    h1{
+        margin-top: 0;
+        font-size: 28px;        
+    }    
+    .center-align strong {
+        font-size: 20px;
+    }
+    span {
+        font-size: 20px;
+    }
+    th {
+        font-size: 10px;
+    }
+    td {
+        font-size: 13px;
+    }
+    .speedometer {
+        background-color: #263743;
+        color: white;
+        strong {
+            font-size: 15px;
+        }
+        span {
+            font-size: 15px;
+        }
+    }
+    .material-icons {
+        font-size: 10px;
+    }
+    button {
+        font-display: 16px;
+    }
+    #eficiencia {
+        width: 50%;
+    }
+    #oee {
+        width: 50%;
+    }
+    #utilizacao {
+        width: 50%;
+    }
+    #refugo {
+        width: 50%;
+    }    
+}
+  @media(min-width: 641px)and(max-width: 800px ){
+    img{
+        margin-top: 0;
+        width: 50px;
+        height: 50px;
+    }
+    h1{
+        margin-top: 0;
+        font-size: 28px;        
+    }    
+    .center-align strong {
+        font-size: 20px;
+    }
+    span {
+        font-size: 20px;
+    }
+    th {
+        font-size: 10px;
+    }
+    td {
+        font-size: 13px;
+    }
+    .speedometer {
+        background-color: #263743;
+        color: white;
+        strong {
+            font-size: 15px;
+        }
+        span {
+            font-size: 15px;
+        }
+    }
+    .material-icons {
+        font-size: 10px;
+    }
+    button {
+        font-display: 16px;
+    }
+    #eficiencia {
+        width: 61%;
+    }
+    #oee {
+        width: 61%;
+    }
+    #utilizacao {
+        width: 61%;
+    }
+    #refugo {
+        width: 61%;
+    }    
+}
+  @media(min-width: 801px)and(max-width: 854px ){
+    img{
+        margin-top: 0;
+        width: 50px;
+        height: 50px;
+    }
+    h1{
+        margin-top: 0;
+        font-size: 28px;        
+    }    
+    .center-align strong {
+        font-size: 20px;
+    }
+    span {
+        font-size: 20px;
+    }
+    th {
+        font-size: 10px;
+    }
+    td {
+        font-size: 13px;
+        padding-right: 75px;
+    }
+    .speedometer {
+        background-color: #263743;
+        color: white;
+        strong {
+            font-size: 15px;
+        }
+        span {
+            font-size: 15px;
+        }
+    }
+    .material-icons {
+        font-size: 10px;
+    }
+    button {
+        font-display: 16px;
+    }
+    #eficiencia {
+        width: 63%;
+    }
+    #oee {
+        width: 63%;
+    }
+    #utilizacao {
+        width: 63%;
+    }
+    #refugo {
+        width: 63%;
+    }    
+}
+  @media(min-height: 481px)and(max-height: 640px ){
+    img{
+        margin-top: 0;
+        width: 50px;
+        height: 50px;
+    }
+    h1{
+        margin-top: 0;
+        font-size: 28px;        
+    }    
+    .center-align strong {
+        font-size: 20px;
+    }
+    span {
+        font-size: 20px;
+    }
+    th {
+        font-size: 15px;
+    }
+    td {
+        font-size: 20px;
+    }
+    .speedometer {
+        background-color: #263743;
+        color: white;
+        strong {
+            font-size: 15px;
+        }
+        span {
+            font-size: 15px;
+        }
+    }
+    .material-icons {
+        font-size: 10px;
+    }
+    button {
+        font-display: 16px;
+    }
+    #eficiencia {
+        width: 73%;
+    }
+    #oee {
+        width: 73%;
+    }
+    #utilizacao {
+        width: 73%;
+    }
+    #refugo {
+        width: 73%;
+    }    
+}
+@media(min-height: 641px)and(max-height: 750px ){
+    img{
+        margin-top: 0;
+        width: 50px;
+        height: 50px;
+    }
+    h1{
+        margin-top: 0;
+        font-size: 28px;        
+    }    
+    .center-align strong {
+        font-size: 20px;
+    }
+    span {
+        font-size: 20px;
+    }
+    th {
+        font-size: 15px;
+    }
+    td {
+        font-size: 20px;
+    }
+    .speedometer {
+        background-color: #263743;
+        color: white;
+        strong {
+            font-size: 15px;
+        }
+        span {
+            font-size: 15px;
+        }
+    }
+    .material-icons {
+        font-size: 10px;
+    }
+    button {
+        font-display: 16px;
+    }
+    #eficiencia {
+        width: 73%;
+    }
+    #oee {
+        width: 73%;
+    }
+    #utilizacao {
+        width: 73%;
+    }
+    #refugo {
+        width: 73%;
+    }    
+}

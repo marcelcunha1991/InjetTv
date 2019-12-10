@@ -1,6 +1,6 @@
 $(() => $('select').formSelect());
 if (localStorage.getItem('cliente')) {
-    console.log(JSON.parse(localStorage.getItem('cliente')).maquinas );
+    
     if(JSON.parse(localStorage.getItem('cliente')).maquinas == true){
         $("#painelMaquinas").prop('checked', true);
     }else{
@@ -63,22 +63,34 @@ $('#galpao').change(e => {
     paradasTemp = $('#painelParadas').val();
 
     $('#preloader').fadeIn().toggleClass('hide');
-
-    axios.post('/maquinas/search', {
-        galpao: galpaoTemp,
-        produtividade: produtividadeTemp,
-        maquinas: maquinasTemp,
-        paradas: paradasTemp,
-
+    axios.get(`${process.env.API_URL}/idw/rest/injet/pts/ativoByGalpao`, {
+        params: {
+            gt:galpaoTemp
+        }
     })
-        .then(response => {
-            $('#preloader').fadeOut().toggleClass('hide');
-            response.data.forEach(pt => $('#maquinas').append(`<option value='${pt.cdPt}'>${pt.cdPt}</option>`));
-            $('select').formSelect();
-        })
-        .catch(error => M.toast({ html: 'Falha ao carregar máquinas, tente novamente mais tarde. ' + error, displayLength: 2000 }));
+    .then(response => {
+        $('#preloader').fadeOut().toggleClass('hide');
+        response.data.pts.forEach(pt => $('#maquinas').append(`<option value='${pt.cdPt}'>${pt.cdPt}</option>`));
+        $('select').formSelect();
+    })
+    .catch(err => {
+        M.toast({ html: 'Falha ao carregar máquinas, tente novamente mais tarde. ' + error, displayLength: 2000 })
+    })
+    // axios.post('/maquinas/search', {
+    //     galpao: galpaoTemp,
+    //     produtividade: produtividadeTemp,
+    //     maquinas: maquinasTemp,
+    //     paradas: paradasTemp,
+
+    // })
+    //     .then(response => {
+    //         $('#preloader').fadeOut().toggleClass('hide');
+    //         response.data.forEach(pt => $('#maquinas').append(`<option value='${pt.cdPt}'>${pt.cdPt}</option>`));
+    //         $('select').formSelect();
+    //     })
+    //     .catch(error => M.toast({ html: 'Falha ao carregar máquinas, tente novamente mais tarde. ' + error, displayLength: 2000 }));
         
-        var cliente = {
+    var cliente = {
         galpao: $("#galpao").val(),
         produtividade: $('#painelProdutividade').is(':checked'),
         maquinas: $('#painelMaquinas').is(':checked'),
