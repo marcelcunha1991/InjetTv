@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+
+require('dotenv').config({path:__dirname+'/.env'});
+
 const app = require('../app'),
     debug = require('debug')('injettv:server'),
     http = require('http'),

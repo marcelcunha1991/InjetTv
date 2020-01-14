@@ -6,31 +6,55 @@ const express = require('express'),
     logo = require('./../helpers/logo'),
     json = require('flatted');
 
+
+
+
+function retornaMes(){
+
+        if (data.getMonth(new Date()) < 10){
+
+            return "0" + data.getMonth(new Date())
+        } else{
+
+            return data.getMonth(new Date())
+        }
+
+
+
+}
+
 router
 .get('/', (request, response, next) => {
     axios
-    .get(`${process.env.API_URL}/idw/rest/injet/monitorizacao/turnoAtual`)
+    .get(`http://170.10.1.165:8081/idw/rest/injet/monitorizacao/turnoAtual`)
     .then(turnoAtual => {
+        console.log(retornaMes())
+        console.log(`${data.getYear(new Date())}-`+ retornaMes() +`-${data.day(new Date())}`)
+        console.log(`${data.getYear(new Date())}-${data.getMonth(new Date())}-${data.day(new Date())}`)
+        console.log(request.session.cfg.galpao)
+        console.log(turnoAtual.data.cdTurno)
         axios
         .all([
-            axios.post(`${process.env.API_URL}/idw/rest/injet/bi/resumoBI`, {
-                dtIni: `${data.getYear(new Date())}-${data.getMonth(new Date())}-${data.day(new Date())}`,
-                dtFim: `${data.getYear(new Date())}-${data.getMonth(new Date())}-${data.day(new Date())}`,
+            axios.post(`http://170.10.1.165:8081/idw/rest/injet/bi/resumoBI`, {
                 cdGalpao: request.session.cfg.galpao,
                 agrupamentoBI: 2,
-                cdTurno: turnoAtual.data.cdTurno
+                cdTurno: turnoAtual.data.cdTurno,
+                dtIni: data.getYear(new Date()) + "-" + retornaMes() +  "-" + data.day(new Date()),
+                dtFim: data.getYear(new Date()) + "-" + retornaMes() +  "-" + data.day(new Date()),
             }),
-            axios.post(`${process.env.API_URL}/idw/rest/injet/bi/resumoBI`, {
+            axios.post(`http://170.10.1.165:8081/idw/rest/injet/bi/resumoBI`, {                
                 anoIni: data.getYear(new Date()),
-                mesIni: data.getMonth(new Date()),
+                mesIni: retornaMes(),
                 anoFim: data.getYear(new Date()),
-                mesFim: data.getMonth(new Date()),
+                mesFim: retornaMes(),
                 cdGalpao: request.session.cfg.galpao,
                 agrupamentoBI: 1,
             }),
-            axios.get(`${process.env.API_URL}/idw/rest/injet/monitorizacao/turnos`)
+            axios.get(`http://170.10.1.165:8081/idw/rest/injet/monitorizacao/turnos`)
         ])
         .then(axios.spread((velocimetro, bi, turnos) => {
+            console.log(velocimetro.data)
+            
             response.status(200).render('produtividade', {
                 velocimetro: velocimetro.data,
                 bi: bi.data,
@@ -47,3 +71,4 @@ router
 });
 
 module.exports = router;
+
