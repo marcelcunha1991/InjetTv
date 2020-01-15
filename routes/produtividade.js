@@ -6,7 +6,7 @@ const express = require('express'),
     logo = require('./../helpers/logo'),
     json = require('flatted');
 
-
+const ip = "http://170.10.1.165:8081";
 
 
 function retornaMes(){
@@ -26,7 +26,7 @@ function retornaMes(){
 router
 .get('/', (request, response, next) => {
     axios
-    .get(`http://170.10.1.165:8081/idw/rest/injet/monitorizacao/turnoAtual`)
+    .get(ip+`/idw/rest/injet/monitorizacao/turnoAtual`)
     .then(turnoAtual => {
         console.log(retornaMes())
         console.log(`${data.getYear(new Date())}-`+ retornaMes() +`-${data.day(new Date())}`)
@@ -35,14 +35,14 @@ router
         console.log(turnoAtual.data.cdTurno)
         axios
         .all([
-            axios.post(`http://170.10.1.165:8081/idw/rest/injet/bi/resumoBI`, {
+            axios.post(ip+`/idw/rest/injet/bi/resumoBI`, {
                 cdGalpao: request.session.cfg.galpao,
                 agrupamentoBI: 2,
                 cdTurno: turnoAtual.data.cdTurno,
                 dtIni: data.getYear(new Date()) + "-" + retornaMes() +  "-" + data.day(new Date()),
                 dtFim: data.getYear(new Date()) + "-" + retornaMes() +  "-" + data.day(new Date()),
             }),
-            axios.post(`http://170.10.1.165:8081/idw/rest/injet/bi/resumoBI`, {                
+            axios.post(ip+`/idw/rest/injet/bi/resumoBI`, {                
                 anoIni: data.getYear(new Date()),
                 mesIni: retornaMes(),
                 anoFim: data.getYear(new Date()),
@@ -50,7 +50,7 @@ router
                 cdGalpao: request.session.cfg.galpao,
                 agrupamentoBI: 1,
             }),
-            axios.get(`http://170.10.1.165:8081/idw/rest/injet/monitorizacao/turnos`)
+            axios.get(ip+`/idw/rest/injet/monitorizacao/turnos`)
         ])
         .then(axios.spread((velocimetro, bi, turnos) => {
             console.log(velocimetro.data)

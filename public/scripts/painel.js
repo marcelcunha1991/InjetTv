@@ -35,6 +35,8 @@ if (localStorage.getItem('cliente')) {
     // });
 }
 
+var ip = "http://170.10.1.165:8081";
+
 $('form').submit(function (event) {
     event.preventDefault();
     if ($('#galpao').val() !== null) {
@@ -62,7 +64,7 @@ $('#galpao').change(e => {
     paradasTemp = $('#painelParadas').val();
 
     $('#preloader').fadeIn().toggleClass('hide');
-    axios.get(`http://170.10.1.165:8081/idw/rest/injet/pts/ativoByGalpao`, {
+    axios.get(ip+`/idw/rest/injet/pts/ativoByGalpao`, {
         params: {
             gt:galpaoTemp
         }
