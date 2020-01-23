@@ -28,9 +28,8 @@ router
                 descricao: paradas.data.paradasGalpao[par].dsParada,
                 cor: '#ff0000'
             });
-        }
-        
-        console.log(parada.length)
+        }    
+
        
 
         for (var ale = 0; ale < alertas.data.alertasGalpao.length;ale++ ){
