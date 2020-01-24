@@ -36,6 +36,7 @@ if (localStorage.getItem('cliente')) {
 }
 
 var ip = "http://170.10.1.165:8081";
+var dataTeste = "21-01-2020";
 
 $('form').submit(function (event) {
     event.preventDefault();

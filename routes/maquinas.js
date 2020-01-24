@@ -15,12 +15,15 @@ router
             idTurno: turnoAtual.data.idTurno,
             filtroOp: 0,
             cdGt: request.session.cfg.galpao,
-            turnoAtual: true,
-            dtReferencia: `${data.day(new Date())}/${data.getMonth(new Date())}/${data.getYear(new Date())}`
+            turnoAtual: false,
+            dtReferencia: "21/01/2020"
+            // dtReferencia: `${data.day(new Date())}/${data.getMonth(new Date())}/${data.getYear(new Date())}`
         })
         .then(res => {
+            console.log(res.data.pts)
             let abaixoMeta = [], semConexao = [], naMeta = [], parada = [], pts = [], pts_ = [];
             res.data.pts.forEach(pt => {
+                console.log("cor: " + pt.icone.caminhoIcone)
                 if(pt.dsProduto !== undefined) {
                     if(pt.dsProduto.indexOf('\n') !== -1)
                         pt.dsProduto = pt.dsProduto.substring(0, pt.dsProduto.indexOf('\n'));
@@ -68,7 +71,7 @@ router
             filtroOp: 0,
             cdGt: request.body.galpao,
             turnoAtual: true,
-            dtReferencia: `${data.day(new Date())}/${data.getMonth(new Date())}/${data.getYear(new Date())}`
+            dtReferencia: "21/01/2020"
         })
         .then(maquinas => response.status(200).send(maquinas.data.pts))
         .catch(maquinasError => response.status(500).render('error', {error: json.stringify(maquinasError)}));
