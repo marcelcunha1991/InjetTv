@@ -57,10 +57,10 @@ function insereTurnoNoBi(biTurnoAtual,turnoAtual){
                             cdGalpao: request.session.cfg.galpao,
                             agrupamentoBI: 2,
                             cdTurno: turnoAtual.data.cdTurno,
-                            dtIni: dataTeste,
-                            dtFim: dataTeste
-                            // dtIni: data.getYear(new Date()) + "-" + retornaMes() +  "-" + data.day(new Date()),
-                            // dtFim: data.getYear(new Date()) + "-" + retornaMes() +  "-" + data.day(new Date()),
+                            // dtIni: dataTeste,
+                            // dtFim: dataTeste
+                            dtIni: data.getYear(new Date()) + "-" + retornaMes() +  "-" + data.day(new Date()),
+                            dtFim: data.getYear(new Date()) + "-" + retornaMes() +  "-" + data.day(new Date())
                         }),
                         axios.post(ip+`/idw/rest/injet/bi/resumoBI`, {                
                             anoIni: data.getYear(new Date()),
@@ -115,10 +115,10 @@ function insereTurnoNoBi(biTurnoAtual,turnoAtual){
                             cdGalpao: request.session.cfg.galpao,
                             agrupamentoBI: 2,
                             cdTurno: turnoAtual.data.cdTurno,
-                            dtIni: dataTeste,
-                            dtFim: dataTeste
-                            // dtIni: data.getYear(new Date()) + "-" + retornaMes() +  "-" + data.day(new Date()),
-                            // dtFim: data.getYear(new Date()) + "-" + retornaMes() +  "-" + data.day(new Date()),
+                            // dtIni: dataTeste,
+                            // dtFim: dataTeste
+                            dtIni: data.getYear(new Date()) + "-" + retornaMes() +  "-" + data.day(new Date()),
+                            dtFim: data.getYear(new Date()) + "-" + retornaMes() +  "-" + data.day(new Date())
                         }),
                         axios.post(ip+`/idw/rest/injet/bi/resumoBI`, {                
                             anoIni: data.getYear(new Date()),
