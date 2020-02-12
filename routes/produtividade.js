@@ -7,7 +7,7 @@ const express = require('express'),
     json = require('flatted')
 
 
-const ip = "http://170.10.1.165:8081";
+const ip = "http://170.10.0.216:8080";
 const dataTeste = "2020-01-21";
 
 var contador = 0;
@@ -43,7 +43,7 @@ function insereTurnoNoBi(biTurnoAtual,turnoAtual){
         .get('/', (request, response, next) => {
             if(contador == 0) {
                 axios
-                .get(ip+`/idw/rest/injet/monitorizacao/turnoAtual`)
+                .get(`http://170.10.0.216:8080/idw/rest/injet/monitorizacao/turnoAtual`)
                 .then(turnoAtual => {
                     console.log("Iniciando Chamada pela primeira vez");
                     console.log(retornaMes())
@@ -53,7 +53,7 @@ function insereTurnoNoBi(biTurnoAtual,turnoAtual){
                     console.log(turnoAtual.data.cdTurno)
                     axios
                     .all([
-                        axios.post(ip+`/idw/rest/injet/bi/resumoBI`, {
+                        axios.post(`http://170.10.0.216:8080/idw/rest/injet/bi/resumoBI`, {
                             cdGalpao: request.session.cfg.galpao,
                             agrupamentoBI: 2,
                             cdTurno: turnoAtual.data.cdTurno,
@@ -62,7 +62,7 @@ function insereTurnoNoBi(biTurnoAtual,turnoAtual){
                             dtIni: data.getYear(new Date()) + "-" + retornaMes() +  "-" + data.day(new Date()),
                             dtFim: data.getYear(new Date()) + "-" + retornaMes() +  "-" + data.day(new Date())
                         }),
-                        axios.post(ip+`/idw/rest/injet/bi/resumoBI`, {                
+                        axios.post(`http://170.10.0.216:8080/idw/rest/injet/bi/resumoBI`, {                
                             anoIni: data.getYear(new Date()),
                             mesIni: retornaMes(),
                             anoFim: data.getYear(new Date()),
@@ -70,7 +70,7 @@ function insereTurnoNoBi(biTurnoAtual,turnoAtual){
                             cdGalpao: request.session.cfg.galpao,
                             agrupamentoBI: 1,
                         }),
-                        axios.get(ip+`/idw/rest/injet/monitorizacao/turnos`)
+                        axios.get(`http://170.10.0.216:8080/idw/rest/injet/monitorizacao/turnos`)
                     ])
                     .then(axios.spread((velocimetro, bi, turnos) => {
                         // console.log(velocimetro.data)

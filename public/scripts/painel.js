@@ -35,7 +35,7 @@ if (localStorage.getItem('cliente')) {
     // });
 }
 
-var ip = "http://170.10.1.165:8081";
+var ip = "http://170.10.0.216:8080";
 var dataTeste = "21-01-2020";
 
 $('form').submit(function (event) {
