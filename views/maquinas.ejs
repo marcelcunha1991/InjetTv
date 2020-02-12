@@ -19,7 +19,7 @@
             let nextPage = '<%=nextPage%>';
         </script>
     </head>
-    <body style="background-color: <%=cor_fundo%>;">
+    <body style="background-color: <%=cor_fundo%>;" onload="startTime()">
         <img src="<%=logo%>" alt=logo width=150 height=150>
         <main>
             <div class=row>
@@ -94,6 +94,9 @@
                                 </div>
                             </div>
                         <% }) %>
+                    </div>  
+                    <div id="foo">
+                        <span width="150" class="right" id=txt style="font-size:2.6rem; margin-right:2%" ></span>
                     </div>
                 </div>
             </div>
@@ -101,5 +104,25 @@
         <script src=/assets/jquery.min.js></script>
         <script src=/scripts/carousel.js></script>
         <script src=/scripts/clear.js></script>
+        <script>
+            function startTime() {
+            var today = new Date();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            var d = today.getDate();
+            var mes = today.getMonth()+1;
+            var a = today.getFullYear();
+            m = checkTime(m);
+            s = checkTime(s);
+            document.getElementById('txt').innerHTML =
+            d +"/"+ mes +"/"+a+ "-"+  h + ":" + m + ":" + s;
+            var t = setTimeout(startTime, 500);
+            }
+            function checkTime(i) {
+            if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+            return i;
+            }
+            </script>
     </body>
 </html>
