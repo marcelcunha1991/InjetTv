@@ -44,11 +44,12 @@ router
                 }
             });
             pts = pts.concat(naMeta, abaixoMeta, parada, semConexao);
-    
+            
             if (request.session.cfg.maquinas) {
                 request.session.cfg.maquinas.forEach((maquina) => {
                     pts_ = pts_.concat(pts.filter((pt) => {
-                        if (pt.cdPt === maquina) return pt;
+                        if (pt.cdInjetora === maquina) 
+                        return pt;
                     }));
                 });
                 pts = pts_;

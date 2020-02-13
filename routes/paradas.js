@@ -46,10 +46,14 @@ router
 
         pts = pts.concat(parada, alerta);
 
+        console.log("maquinas" + " " + request.session.cfg.maquinas)
                 if (request.session.cfg.maquinas) {
                     request.session.cfg.maquinas.forEach((maquina) => {
+                        console.log("maquina: " + " " + maquina)
                         pts_ = pts_.concat(pts.filter((pt) => {
-                            if (pt.cdPt === maquina) return pt;
+                            if (pt.cdInjetora === maquina) 
+                            console.log("cdInjetora: " + " " + pt.cdInjetora + "== " + maquina )
+                            return pt;
                         }));
                     });
                     pts = pts_;
