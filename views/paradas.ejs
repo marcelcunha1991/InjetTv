@@ -6,6 +6,7 @@
         <meta name=viewport content="width=device-width, initial-scale=1">
         <link rel=stylesheet href=/assets/css/materialize.min.css />
         <link rel=stylesheet href=/styles/css/paradas.css />
+    
         <style>
         img {
             position: absolute;
@@ -29,7 +30,16 @@
                         <i class="material-icons">home</i>
                     </button>
                 </div>
+                <div>                          
+                </div>
                 <h1 class=center-align>Paradas | Alertas</h1>
+                <div id="foo">
+                        <span width="150" class="right" id=txt style=" position: absolute;
+                        top: 6px;
+                        left: 10%;
+                        font-size: 80px;" ></span>
+                    </div>
+                
                 <div class="container">
                     <div class="col l12">
                         <div class="descricao row valign-wrapper">
@@ -56,12 +66,14 @@
                                 </div>
                             </div>
                         <% }) %>
+                        
                     </div>
+                   
                     
                 </div>
-                <div id="foo">
-                    <span width="150" class="right" id=txt style="font-size:2.6rem; margin-right:2%" ></span>
-                </div>
+
+               
+                
             </div>
         </main>
         <script src=/assets/jquery.min.js></script>
@@ -79,7 +91,8 @@
             m = checkTime(m);
             s = checkTime(s);
             document.getElementById('txt').innerHTML =
-            d +"/"+ mes +"/"+a+ "-"+  h + ":" + m + ":" + s;
+            // d +"/"+ mes +"/"+a+ "-"+  h + ":" + m + ":" + s;
+             h + ":" + m + ":" + s;
             var t = setTimeout(startTime, 500);
             }
             function checkTime(i) {

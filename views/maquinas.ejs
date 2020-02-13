@@ -6,6 +6,7 @@
         <meta name=viewport content="width=device-width, initial-scale=1">
         <link rel=stylesheet href=/assets/css/materialize.min.css />
         <link rel=stylesheet href=/styles/css/maquinas.css />
+        
         <style>
         img {
             position: absolute;
@@ -30,9 +31,14 @@
                             <i class="material-icons">home</i>
                         </button>
                     </div>
-                    <div class="col s3">
-                        <span>Mostrar Grupo/Máquinas</span>
-                    </div>
+                    <h1 class=center-align>Grupo/Máquinas</h1>
+                    <div id="foo">
+                            <span width="150" class="right" id=txt style=" position: absolute;
+                            top: 6px;
+                            left: 10%;
+                            font-size: 80px;" ></span>
+                        </div>
+                  
                     <!-- <div class="col s7">
                             <form id=circle action="circle">
                                 
@@ -57,9 +63,9 @@
                             </form>
                     </div> -->
                 </div>
-                <h3 class=center-align>Performance Máquinas</h3>
+              
                 <div class=container>
-                    <div class="col l12">
+                    <div class="col l13">
                         <div class="descricao row valign-wrapper">
                             <div class="item flex-item-1 grow0">
                             </div>
@@ -68,8 +74,8 @@
                             <div class="item flex-item-1">
                                 Máquina
                             </div>
-                            <div class="item flex-item-1">
-                                Descrição do produto
+                            <div class="item flex-item-15">
+                                Produto
                             </div>
                             <div class="item flex-item-1">
                                 OEE
@@ -97,9 +103,7 @@
                             
                         <% }) %>
                     </div>  
-                    <div id="foo">
-                        <span width="150" class="right" id=txt style="font-size:2.6rem; margin-right:2%" ></span>
-                    </div>
+               
                 </div>
             </div>
         </main>
@@ -118,7 +122,8 @@
             m = checkTime(m);
             s = checkTime(s);
             document.getElementById('txt').innerHTML =
-            d +"/"+ mes +"/"+a+ "-"+  h + ":" + m + ":" + s;
+            // d +"/"+ mes +"/"+a+ "-"+  h + ":" + m + ":" + s;
+            h + ":" + m + ":" + s;
             var t = setTimeout(startTime, 500);
             }
             function checkTime(i) {
