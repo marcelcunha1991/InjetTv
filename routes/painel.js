@@ -5,19 +5,15 @@ const express = require('express'),
     time = require('./../helpers/time'),
     axios = require('axios');
 
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
-
-    today = dd + '/' + mm + '/' + yyyy;
+    var g1 = new Date(); 
+    var g2 = new Date(process.env.DATA_FINAL); 
 
 if(process.env.TRIAL == "true"){
     console.log("è trial")
-    console.log("Data Inicio Trial: " + process.env.DATA_FINAL)
-    console.log("Data Atual: " + today)
+    console.log("Data Final Trial: " + g2.getTime())
+    console.log("Data Atual: " + g1.getTime())
 
-    if(process.env.DATA_FINAL < today ){
+    if(g2.getTime()< g1.getTime()){
         console.log("fora de trial")
     }else{
         router
