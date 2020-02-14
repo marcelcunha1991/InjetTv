@@ -6,7 +6,7 @@ const express = require('express'),
     logo = require('./../helpers/logo'),
     json = require('flatted');
 
-const ip = "http://170.10.1.165:8081";
+const ip = "http://170.10.0.206:8080";
 
 
 function retornaMes(){
