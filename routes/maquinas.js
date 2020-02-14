@@ -21,6 +21,7 @@ router
         .then(res => {
             let abaixoMeta = [], semConexao = [], naMeta = [], parada = [], pts = [], pts_ = [];
             res.data.pts.forEach(pt => {
+                console.log(pt.cdPt + "   " + pt.icone.caminhoIcone)
                 if(pt.dsProduto !== undefined) {
                     if(pt.dsProduto.indexOf('\n') !== -1)
                         pt.dsProduto = pt.dsProduto.substring(0, pt.dsProduto.indexOf('\n'));
@@ -44,16 +45,33 @@ router
                 }
             });
             pts = pts.concat(naMeta, abaixoMeta, parada, semConexao);
-            
-            if (request.session.cfg.maquinas) {
-                request.session.cfg.maquinas.forEach((maquina) => {
+
+
+
+
+            if(typeof request.session.cfg.maquinas === 'string'  ){            
+                if (request.session.cfg.maquinas) {
                     pts_ = pts_.concat(pts.filter((pt) => {
-                        if (pt.cdInjetora === maquina) 
+                        if (pt.cdPt === request.session.cfg.maquinas) 
                         return pt;
                     }));
-                });
-                pts = pts_;
+                    pts = pts_;
+                }
             }
+            if(typeof request.session.cfg.maquinas === 'undefined' || typeof request.session.cfg.maquinas === 'object'  ){            
+                if (request.session.cfg.maquinas) {
+                    request.session.cfg.maquinas.forEach((maquina) => {
+                        pts_ = pts_.concat(pts.filter((pt) => {
+                            if (pt.cdPt === maquina) 
+                            return pt;
+                        }));
+                    });
+                    pts = pts_;
+                }
+            }
+            
+     
+            
             response.status(200).render('maquinas', { pts: pts, secondsTransition: request.session.cfg.tempo_trans, cor_fundo: request.session.cfg.cor_fundo, nextPage: panel.switch(request.baseUrl, request.session.paineis), logo: logo.hasLogo()});
         })
         .catch(error => response.status(500).render('error', {error: error}));

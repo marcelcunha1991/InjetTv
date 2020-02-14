@@ -46,17 +46,31 @@ router
 
         pts = pts.concat(parada, alerta);
 
-        console.log("maquinas" + " " + request.session.cfg.maquinas)
-                if (request.session.cfg.maquinas) {
-                    request.session.cfg.maquinas.forEach((maquina) => {
-                        console.log("maquina: " + " " + maquina)
-                        pts_ = pts_.concat(pts.filter((pt) => {
-                            if (pt.cdInjetora === maquina) 
-                            console.log("cdInjetora: " + " " + pt.cdInjetora + "== " + maquina )
-                            return pt;
-                        }));
-                    });
-                    pts = pts_;
+                console.log(typeof request.session.cfg.maquinas);
+
+                if(typeof request.session.cfg.maquinas === 'string'  ){            
+                    if (request.session.cfg.maquinas) {
+                        console.log("maquina: " + " " + request.session.cfg.maquinas)
+                            pts_ = pts_.concat(pts.filter((pt) => {
+                                console.log("cdInjetora: " + " " + pt.cdPt + " == " + request.session.cfg.maquinas )
+                                if (pt.cdPt === request.session.cfg.maquinas)                             
+                                return pt;
+                            }));
+                        pts = pts_;
+                    }
+                }
+                if(typeof request.session.cfg.maquinas === 'undefined' || typeof request.session.cfg.maquinas === 'object'  ){            
+                    if (request.session.cfg.maquinas) {
+                        request.session.cfg.maquinas.forEach((maquina) => {
+                            console.log("maquina: " + " " + maquina)
+                            pts_ = pts_.concat(pts.filter((pt) => {
+                                console.log("cdInjetora: " + " " + pt.cdPt + " == " + maquina )
+                                if (pt.cdPt === maquina)                             
+                                return pt;
+                            }));
+                        });
+                        pts = pts_;
+                    }
                 }
         console.log("4")
         response.status(200).render('paradas', { pts: pts, secondsTransition: request.session.cfg.tempo_trans, cor_fundo: request.session.cfg.cor_fundo, nextPage: panel.switch(request.baseUrl, request.session.paineis), logo: logo.hasLogo()});
