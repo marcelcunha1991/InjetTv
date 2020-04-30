@@ -22,7 +22,7 @@
         "htmlparser2": "^3.10.0",
         "http-errors": "~1.6.2",
         "ip": "^1.1.5",
-        "jquery": "^3.4.0",
+        "jquery": "^3.5.0",
         "local-storage": "^2.0.0",
         "materialize-css": "^1.0.0",
         "moment": "^2.24.0",
