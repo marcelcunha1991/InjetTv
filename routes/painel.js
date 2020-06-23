@@ -22,52 +22,7 @@ const express = require('express'),
 
             return data.getMonth(new Date())
         }
-}
-
-    async function produtividadeTask(request){   
-
-        await axios
-        .get(`${process.env.API_URL}/idw/rest/injet/monitorizacao/turnoAtual`)
-        .then(turnoAtual => {   
-                    console.log("entrou no metodo task");
-                    axios
-                    .all([
-                        axios.post(`${process.env.API_URL}/idw/rest/injet/bi/resumoBI`, {
-                            cdGalpao: request.session.cfg.galpao,
-                            agrupamentoBI: 2,
-                            cdTurno: turnoAtual.data.cdTurno,                            
-                            dtIni: data.getYear(new Date()) + "-" + retornaMes() +  "-" + data.day(new Date()),
-                            dtFim: data.getYear(new Date()) + "-" + retornaMes() +  "-" + data.day(new Date())
-                        }),
-                        axios.post(`${process.env.API_URL}/idw/rest/injet/bi/resumoBI`, {                
-                            anoIni: data.getYear(new Date()),
-                            mesIni: retornaMes(),
-                            anoFim: data.getYear(new Date()),
-                            mesFim: retornaMes(),
-                            cdGalpao: request.session.cfg.galpao,
-                            agrupamentoBI: 1,
-                        }),
-                        axios.get(`${process.env.API_URL}/idw/rest/injet/monitorizacao/turnos`)
-                    ])
-                    .then(axios.spread((velocimetro, bi, turnos) => {
-                            
-                        velocimetroTemp  = velocimetro;                        
-                       
-                        request.session.velocimetro = velocimetro.data;
-                        request.session.bi = bi.data;
-                        request.session.turnos = turnos;     
-                      
-                        console.log("passou pelo metodo task");
-                        produtividadeTask(request);                        
-                        
-                    }))
-                    .catch(errorBI => console.log(errorBI));
-                })
-                .catch(errorTurnoAtual => console.log(errorTurnoAtual));
-        
-    }    
-
-     
+}    
 
     
 
@@ -95,7 +50,7 @@ if(process.env.TRIAL == "true"){
     request.session.cfg.logo = logo.hasLogo();
     request.session.cfg.tempo_trans = time.getTime(request.body.tempo_trans);
 
-    produtividadeTask(request);
+    //produtividadeTask(request);
 
     if(request.session.paineis.produtividade == true)
         response.redirect('/produtividade');
@@ -131,7 +86,7 @@ module.exports = router;
     request.session.cfg.logo = logo.hasLogo();
     request.session.cfg.tempo_trans = time.getTime(request.body.tempo_trans);
 
-    produtividadeTask(request);
+    //produtividadeTask(request);
 
     if(request.session.paineis.produtividade == true)
         response.redirect('/produtividade');

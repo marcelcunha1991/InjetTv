@@ -7,11 +7,13 @@ const express = require('express'),
     json = require('flatted')
 
 var turnoAtualVar
-const ip = "http://192.168.43.123:8081";
+const ip = "http://10.4.100.2:8080";
 const dataTeste = "2020-01-21";
 
 var contador = 0;
-var biTemp;
+var velocimetroGlobal;
+var biGlobal;
+var turnoGlobal;
 
 function retornaMes(){
 
@@ -30,6 +32,7 @@ function retornaMes(){
                 axios
                 .get(ip+`/idw/rest/injet/monitorizacao/turnoAtual`)
                 .then(turnoAtual => {
+                    produtividadeTask(request);
                     console.log("Iniciando Chamada pela primeira vez");
                     console.log(retornaMes())
                     console.log(`${data.getYear(new Date())}-`+ retornaMes() +`-${data.day(new Date())}`)
@@ -58,13 +61,15 @@ function retornaMes(){
                         }),
                         axios.get(ip+`/idw/rest/injet/monitorizacao/turnos`)
                     ])
-                    .then(axios.spread((velocimetro, bi, turnos) => {
-                        //console.log(bi.data)
-    
-                        velocimetroTemp  = velocimetro;
+                    .then(axios.spread((velocimetro, bi, turnos) => {       
                         
-                        // console.log("Temporaria " + velocimetroTemp.data)
-                        
+                        contador++;      
+                        velocimetroGlobal = velocimetro;
+                        biGlobal = bi;
+                        turnoGlobal = turnos;
+                       
+                        console.log("Chamada original "  + velocimetro.data);
+
                         response.status(200).render('produtividade', {
                             velocimetro: velocimetro.data,
                             bi: bi.data,
@@ -74,10 +79,10 @@ function retornaMes(){
                             nextPage: panel.switch(request.baseUrl, request.session.paineis),
                             logo: logo.hasLogo()
                         });
-                        biTemp = bi
-                        contador++;      
-                      
-                        console.log(contador)
+
+                        
+                       
+                        
                     }))
                     .catch(errorBI => response.status(500).render('error', {error: json.stringify(errorBI)}));
                 })
@@ -85,11 +90,11 @@ function retornaMes(){
     
             
             }else{
-
+              
                 response.status(200).render('produtividade', {
-                    velocimetro: request.session.paineis.velocimetro,
-                    bi: request.session.bi,
-                    turnos: request.session.turnos,
+                    velocimetro: velocimetroGlobal.data,
+                    bi: biGlobal.data,
+                    turnos: turnoGlobal.data.turnos,
                     secondsTransition: request.session.cfg.tempo_trans,
                     cor_fundo: request.session.cfg.cor_fundo,
                     nextPage: panel.switch(request.baseUrl, request.session.paineis),
@@ -101,6 +106,49 @@ function retornaMes(){
            
 
         });
+
+
+async function produtividadeTask(request){   
+
+    await axios
+    .get(`${process.env.API_URL}/idw/rest/injet/monitorizacao/turnoAtual`)
+    .then(turnoAtual => {   
+                console.log("entrou no metodo task");
+                axios
+                .all([
+                    axios.post(`${process.env.API_URL}/idw/rest/injet/bi/resumoBI`, {
+                        cdGalpao: request.session.cfg.galpao,
+                        agrupamentoBI: 2,
+                        cdTurno: turnoAtual.data.cdTurno,                            
+                        dtIni: data.getYear(new Date()) + "-" + retornaMes() +  "-" + data.day(new Date()),
+                        dtFim: data.getYear(new Date()) + "-" + retornaMes() +  "-" + data.day(new Date())
+                    }),
+                    axios.post(`${process.env.API_URL}/idw/rest/injet/bi/resumoBI`, {                
+                        anoIni: data.getYear(new Date()),
+                        mesIni: retornaMes(),
+                        anoFim: data.getYear(new Date()),
+                        mesFim: retornaMes(),
+                        cdGalpao: request.session.cfg.galpao,
+                        agrupamentoBI: 1,
+                    }),
+                    axios.get(`${process.env.API_URL}/idw/rest/injet/monitorizacao/turnos`)
+                ])
+                .then(axios.spread((velocimetro, bi, turnos) => {
+                                         
+                        velocimetroGlobal = velocimetro;
+                        biGlobal = bi;
+                        turnoGlobal = turnos;  
+                  
+                    console.log("passou pelo metodo task");
+                    
+                    produtividadeTask(request);                        
+                    
+                }))
+                .catch(errorBI => console.log(errorBI));
+            })
+            .catch(errorTurnoAtual => console.log(errorTurnoAtual));
+    
+}    
 
 
 

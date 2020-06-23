@@ -35,7 +35,7 @@ if (localStorage.getItem('cliente')) {
     // });
 }
 
-var ip = "http://192.168.43.123 :8081";
+var ip = "http://10.4.100.2:8080";
 
 $('form').submit(function (event) {
     event.preventDefault();
