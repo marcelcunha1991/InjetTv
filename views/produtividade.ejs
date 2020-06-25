@@ -11,21 +11,7 @@
             let secondsTransition = '<%=secondsTransition%>';
             let nextPage = '<%=nextPage%>';
         </script>
-        <script>
-            setInterval(() => window.location.reload(), 15000);
-            function pegaRadio() {
-                var TempoAtt = document.getElementById("TempoAtt");
-                document.getElementById("TempoAtt").onclick = function() {
-                    var radios = document.getElementsByName("selTime");
-                    for (var i = 0; i < radios.length; i++) {
-                        if (radios[i].checked) {
-                            console.log("Escolheu: " + radios[i].value);
-                            setInterval(() => window.location.reload(), radios[i].value);
-                        }
-                    }
-                };
-            }
-        </script>
+       
         
     </head>
     <body style="background-color: <%=cor_fundo%>">

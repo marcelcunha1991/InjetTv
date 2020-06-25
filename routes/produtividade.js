@@ -101,9 +101,7 @@ function retornaMes(){
                     logo: logo.hasLogo()
                 });
 
-            }
-
-           
+            }           
 
         });
 
