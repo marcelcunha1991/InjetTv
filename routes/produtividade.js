@@ -14,6 +14,7 @@ var contador = 0;
 var velocimetroGlobal;
 var biGlobal;
 var turnoGlobal;
+var ultimaAtualizacao;
 
 function retornaMes(){
 
@@ -24,6 +25,17 @@ function retornaMes(){
 
             return data.getMonth(new Date())
         }
+}
+
+function getToday(){
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = mm + '/' + dd + '/' + yyyy + "  " + today.getHours()+":"+today.getMinutes()+":"+today.getSeconds()
+    
+    return today;
 }
 
         router
@@ -77,7 +89,8 @@ function retornaMes(){
                             secondsTransition: request.session.cfg.tempo_trans,
                             cor_fundo: request.session.cfg.cor_fundo,
                             nextPage: panel.switch(request.baseUrl, request.session.paineis),
-                            logo: logo.hasLogo()
+                            logo: logo.hasLogo(),
+                            ultimaAtualizacao : getToday()
                         });
 
                         
@@ -98,7 +111,8 @@ function retornaMes(){
                     secondsTransition: request.session.cfg.tempo_trans,
                     cor_fundo: request.session.cfg.cor_fundo,
                     nextPage: panel.switch(request.baseUrl, request.session.paineis),
-                    logo: logo.hasLogo()
+                    logo: logo.hasLogo(),
+                    ultimaAtualizacao : ultimaAtualizacao
                 });
 
             }           
@@ -136,10 +150,15 @@ async function produtividadeTask(request){
                         velocimetroGlobal = velocimetro;
                         biGlobal = bi;
                         turnoGlobal = turnos;  
+                        ultimaAtualizacao = getToday();
                   
                     console.log("passou pelo metodo task");
-                    
-                    produtividadeTask(request);                        
+
+                    setTimeout(function(){ 
+                        produtividadeTask(request);
+                    }, 600000);
+                  
+                                          
                     
                 }))
                 .catch(errorBI => console.log(errorBI));
