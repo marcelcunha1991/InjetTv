@@ -6,7 +6,7 @@ const express = require('express'),
     logo = require('./../helpers/logo'),
     json = require('flatted')
 
-var turnoAtualVar
+var turnoAtualVar;
 const ip = "http://10.4.100.2:8080";
 const dataTeste = "2020-01-21";
 

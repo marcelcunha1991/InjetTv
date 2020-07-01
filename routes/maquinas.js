@@ -88,7 +88,14 @@ router
                 }
             }
             contador++;
-            response.status(200).render('maquinas', { pts: pts, secondsTransition: request.session.cfg.tempo_trans, cor_fundo: request.session.cfg.cor_fundo, nextPage: panel.switch(request.baseUrl, request.session.paineis), logo: logo.hasLogo()});
+            response.status(200).render('maquinas', { 
+                pts: pts, 
+                secondsTransition: request.session.cfg.tempo_trans, 
+                cor_fundo: request.session.cfg.cor_fundo, 
+                nextPage: panel.switch(request.baseUrl, request.session.paineis), 
+                logo: logo.hasLogo(),
+                ultimaAtualizacao : getToday()
+            });
         })
         .catch(error => response.status(500).render('error', {error: error}));
     })
