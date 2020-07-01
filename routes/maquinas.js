@@ -9,6 +9,18 @@ const express = require('express'),
     
 var contador = 0;
 var ptsGlobal;
+var ultimaAtualizacao;
+
+function getToday(){
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = mm + '/' + dd + '/' + yyyy + "  " + today.getHours()+":"+today.getMinutes()+":"+today.getSeconds()
+    
+    return today;
+}
 
 router
 .get('/', (request, response, next) => {
@@ -132,7 +144,14 @@ router
             }
         }
         contador++;
-        response.status(200).render('maquinas', { pts: pts, secondsTransition: request.session.cfg.tempo_trans, cor_fundo: request.session.cfg.cor_fundo, nextPage: panel.switch(request.baseUrl, request.session.paineis), logo: logo.hasLogo()});
+        response.status(200).render('maquinas', { 
+            pts: pts, 
+            secondsTransition: request.session.cfg.tempo_trans, 
+            cor_fundo: request.session.cfg.cor_fundo, 
+            nextPage: panel.switch(request.baseUrl, request.session.paineis), 
+            logo: logo.hasLogo(),
+            ultimaAtualizacao : ultimaAtualizacao
+        });
     }
     
 })
@@ -168,8 +187,12 @@ async function maquinasTask(request){
        })
        .then(res => {            
            ptsGlobal = res;
+           ultimaAtualizacao = getToday();
 
-           maquinasTask(request);
+            setTimeout(function(){ 
+                maquinasTask(request);;
+            }, 600000);
+          
            
        })
        .catch(error => response.status(500).render('error', {error: error}));
