@@ -24,9 +24,13 @@ function getToday(){
 
 router
 .get('/', (request, response, next) => {
-    maquinasTask(request);
+    
 
     if(contador == 0) { 
+
+        setInterval(function(){ 
+            maquinasTask(request);
+        }, 600000);
 
     axios
     .get(`${process.env.API_URL}/idw/rest/injet/monitorizacao/turnoAtual`)
@@ -40,7 +44,7 @@ router
         })
         .then(res => {            
             ptsGlobal = res;
-
+            ultimaAtualizacao = getToday()
             let abaixoMeta = [], semConexao = [], naMeta = [], parada = [], pts = [], pts_ = [];
             res.data.pts.forEach(pt => {
                 if(pt.dsProduto !== undefined) {
@@ -94,7 +98,7 @@ router
                 cor_fundo: request.session.cfg.cor_fundo, 
                 nextPage: panel.switch(request.baseUrl, request.session.paineis), 
                 logo: logo.hasLogo(),
-                ultimaAtualizacao : getToday()
+                ultimaAtualizacao: getToday()
             });
         })
         .catch(error => response.status(500).render('error', {error: error}));
@@ -104,28 +108,34 @@ router
     }else{
 
         let abaixoMeta = [], semConexao = [], naMeta = [], parada = [], pts = [], pts_ = [];
-
+        console.log("Entrou so else");
+       
         ptsGlobal.data.pts.forEach(pt => {
+          
             if(pt.dsProduto !== undefined) {
                 if(pt.dsProduto.indexOf('\n') !== -1)
                     pt.dsProduto = pt.dsProduto.substring(0, pt.dsProduto.indexOf('\n'));
             }
 
-            if(pt.icone.caminhoIcone.includes('AbaixoMeta')) {
-                pt.icone.caminhoIcone = '#f1c40f';
+            if(pt.icone.caminhoIcone.includes('f1c40f') || pt.icone.caminhoIcone.includes('AbaixoMeta')) {     
+                pt.icone.caminhoIcone = '#f1c40f';           
                 abaixoMeta.push(pt);
+                console.log("Tamanho do abaixoMeta:" + abaixoMeta.length);
             }
-            if(pt.icone.caminhoIcone.includes('SemConexao')) {
-                pt.icone.caminhoIcone = '#7f8c8d';
+            if(pt.icone.caminhoIcone.includes('7f8c8d') || pt.icone.caminhoIcone.includes('SemConexao')) {
+                pt.icone.caminhoIcone = '#7f8c8d';                 
                 semConexao.push(pt);
+                console.log("Tamanho do semConexao:" + semConexao.length);
             }
-            if(pt.icone.caminhoIcone.includes('NaMeta')) {
-                pt.icone.caminhoIcone = '#4cd137';
+            if(pt.icone.caminhoIcone.includes('4cd137') || pt.icone.caminhoIcone.includes('NaMeta')) { 
+                pt.icone.caminhoIcone = '#4cd137';                   
                 naMeta.push(pt);
+                console.log("Tamanho do naMeta:" + naMeta.length);
             }
-            if(pt.icone.caminhoIcone.includes('Parada')) {
-                pt.icone.caminhoIcone = '#c0392b';
+            if(pt.icone.caminhoIcone.includes('c0392b') || pt.icone.caminhoIcone.includes('Parada')) {    
+                pt.icone.caminhoIcone = '#c0392b';              
                 parada.push(pt);
+                console.log("Tamanho do parada:" + naMeta.parada);
             }
         });
         pts = pts.concat(naMeta, abaixoMeta, parada, semConexao);
@@ -181,7 +191,7 @@ router
 
 
 async function maquinasTask(request){   
-
+    console.log("Entrou na função de thread as " + getToday());
    await axios
    .get(`${process.env.API_URL}/idw/rest/injet/monitorizacao/turnoAtual`)
    .then(turnoAtual => {
@@ -196,9 +206,7 @@ async function maquinasTask(request){
            ptsGlobal = res;
            ultimaAtualizacao = getToday();
 
-            setTimeout(function(){ 
-                maquinasTask(request);;
-            }, 600000);
+            
           
            
        })

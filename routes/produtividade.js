@@ -7,7 +7,7 @@ const express = require('express'),
     json = require('flatted')
 
 var turnoAtualVar;
-const ip = "http://10.4.100.2:8080";
+const ip = "http://25.83.234.121:8080";
 const dataTeste = "2020-01-21";
 
 var contador = 0;
@@ -41,10 +41,18 @@ function getToday(){
         router
         .get('/', (request, response, next) => {
             if(contador == 0) { 
+            
+
+                setInterval(function(){  
+                    produtividadeTask(request);
+                }, 600000);
+            
+
                 axios
                 .get(ip+`/idw/rest/injet/monitorizacao/turnoAtual`)
                 .then(turnoAtual => {
-                    produtividadeTask(request);
+                    console.log("Fez chamada de produtividade na pela primeira vez as " + getToday());
+                   
                     console.log("Iniciando Chamada pela primeira vez");
                     console.log(retornaMes())
                     console.log(`${data.getYear(new Date())}-`+ retornaMes() +`-${data.day(new Date())}`)
@@ -79,6 +87,7 @@ function getToday(){
                         velocimetroGlobal = velocimetro;
                         biGlobal = bi;
                         turnoGlobal = turnos;
+                        ultimaAtualizacao = getToday();
                        
                         console.log("Chamada original "  + velocimetro.data);
 
@@ -121,7 +130,7 @@ function getToday(){
 
 
 async function produtividadeTask(request){   
-
+    console.log("Fez chamada de produtividade na thread as " + getToday());
     await axios
     .get(`${process.env.API_URL}/idw/rest/injet/monitorizacao/turnoAtual`)
     .then(turnoAtual => {   
@@ -154,12 +163,6 @@ async function produtividadeTask(request){
                   
                     console.log("passou pelo metodo task");
 
-                    setTimeout(function(){ 
-                        produtividadeTask(request);
-                    }, 600000);
-                  
-                                          
-                    
                 }))
                 .catch(errorBI => console.log(errorBI));
             })
