@@ -88,10 +88,10 @@ module.exports = router;
 
     //produtividadeTask(request);
 
-    if(request.session.paineis.produtividade == true)
-        response.redirect('/produtividade');
-    else if (request.session.paineis.maquinas == true)
+    if (request.session.paineis.maquinas == true)
         response.redirect('/maquinas');
+    else if(request.session.paineis.produtividade == true)
+        response.redirect('/produtividade');
     else
         response.redirect('/paradas');
    

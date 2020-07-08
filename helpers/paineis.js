@@ -26,22 +26,22 @@ module.exports = {
     },
     switch: (path, paineis) => {
         if(path.includes('produtividade')) {
-            if(paineis.maquinas) return 'maquinas';
             if(paineis.paradas) return 'paradas';
+            if(paineis.maquinas) return 'maquinas';
 
             return 'produtividade';
         }
 
         if(path.includes('maquinas')) {
-            if(paineis.paradas) return 'paradas';
             if(paineis.produtividade) return 'produtividade';
+            if(paineis.paradas) return 'paradas';
 
             return 'maquinas';
         }
 
         if(path.includes('paradas')) {
-            if(paineis.produtividade) return 'produtividade';
             if(paineis.maquinas) return 'maquinas';
+            if(paineis.produtividade) return 'produtividade';
 
             return 'paradas';
         }
