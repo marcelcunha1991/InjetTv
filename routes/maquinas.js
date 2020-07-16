@@ -10,6 +10,7 @@ const express = require('express'),
 var contador = 0;
 var ptsGlobal;
 var ultimaAtualizacao;
+var globalRequest;
 
 function getToday(){
     var today = new Date();
@@ -27,6 +28,8 @@ router
     
 
     if(contador == 0) { 
+
+        globalRequest = request;
 
         setInterval(function(){ 
             maquinasTask(request);
@@ -106,6 +109,8 @@ router
     .catch(errorTurnoAtual => response.status(500).send(json.stringify(errorTurnoAtual)));
 
     }else{
+
+        globalRequest = request;
 
         let abaixoMeta = [], semConexao = [], naMeta = [], parada = [], pts = [], pts_ = [];
         console.log("Entrou so else");
@@ -198,7 +203,7 @@ async function maquinasTask(request){
        axios.post(`${process.env.API_URL}/idw/rest/injet/monitorizacao`, {
            idTurno: turnoAtual.data.idTurno,
            filtroOp: 0,
-           cdGt: request.session.cfg.galpao,
+           cdGt: globalRequest.session.cfg.galpao,
            turnoAtual: true,
            dtReferencia: `${data.day(new Date())}/${data.getMonth(new Date())}/${data.getYear(new Date())}`
        })

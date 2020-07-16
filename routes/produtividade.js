@@ -15,6 +15,7 @@ var velocimetroGlobal;
 var biGlobal;
 var turnoGlobal;
 var ultimaAtualizacao;
+var globalRequest;
 
 function retornaMes(){
 
@@ -42,6 +43,7 @@ function getToday(){
         .get('/', (request, response, next) => {
             if(contador == 0) { 
             
+                globalRequest = request;
 
                 setInterval(function(){  
                     produtividadeTask(request);
@@ -112,7 +114,9 @@ function getToday(){
     
             
             }else{
-              
+
+                globalRequest = request;
+
                 response.status(200).render('produtividade', {
                     velocimetro: velocimetroGlobal.data,
                     bi: biGlobal.data,
@@ -138,7 +142,7 @@ async function produtividadeTask(request){
                 axios
                 .all([
                     axios.post(`${process.env.API_URL}/idw/rest/injet/bi/resumoBI`, {
-                        cdGalpao: request.session.cfg.galpao,
+                        cdGalpao: globalRequest.session.cfg.galpao,
                         agrupamentoBI: 2,
                         cdTurno: turnoAtual.data.cdTurno,                            
                         dtIni: data.getYear(new Date()) + "-" + retornaMes() +  "-" + data.day(new Date()),
@@ -149,7 +153,7 @@ async function produtividadeTask(request){
                         mesIni: retornaMes(),
                         anoFim: data.getYear(new Date()),
                         mesFim: retornaMes(),
-                        cdGalpao: request.session.cfg.galpao,
+                        cdGalpao: globalRequest.session.cfg.galpao,
                         agrupamentoBI: 1,
                     }),
                     axios.get(`${process.env.API_URL}/idw/rest/injet/monitorizacao/turnos`)
