@@ -10,6 +10,7 @@ const express = require('express'),
 var contador = 0;
 var ptsGlobal;
 var ultimaAtualizacao;
+var globalRequest;
 
 function getToday(){
     var today = new Date();
@@ -28,9 +29,11 @@ router
 
     if(contador == 0) { 
 
+        globalRequest = request;
+
         setInterval(function(){ 
             maquinasTask(request);
-        }, 600000);
+        }, 150000);
 
     axios
     .get(`${process.env.API_URL}/idw/rest/injet/monitorizacao/turnoAtual`)
@@ -106,7 +109,7 @@ router
     .catch(errorTurnoAtual => response.status(500).send(json.stringify(errorTurnoAtual)));
 
     }else{
-
+        globalRequest = request
         let abaixoMeta = [], semConexao = [], naMeta = [], parada = [], pts = [], pts_ = [];
         console.log("Entrou so else");
        
@@ -120,22 +123,22 @@ router
             if(pt.icone.caminhoIcone.includes('f1c40f') || pt.icone.caminhoIcone.includes('AbaixoMeta')) {     
                 pt.icone.caminhoIcone = '#f1c40f';           
                 abaixoMeta.push(pt);
-                console.log("Tamanho do abaixoMeta:" + abaixoMeta.length);
+               
             }
             if(pt.icone.caminhoIcone.includes('7f8c8d') || pt.icone.caminhoIcone.includes('SemConexao')) {
                 pt.icone.caminhoIcone = '#7f8c8d';                 
                 semConexao.push(pt);
-                console.log("Tamanho do semConexao:" + semConexao.length);
+                
             }
             if(pt.icone.caminhoIcone.includes('4cd137') || pt.icone.caminhoIcone.includes('NaMeta')) { 
                 pt.icone.caminhoIcone = '#4cd137';                   
                 naMeta.push(pt);
-                console.log("Tamanho do naMeta:" + naMeta.length);
+                
             }
             if(pt.icone.caminhoIcone.includes('c0392b') || pt.icone.caminhoIcone.includes('Parada')) {    
                 pt.icone.caminhoIcone = '#c0392b';              
                 parada.push(pt);
-                console.log("Tamanho do parada:" + naMeta.parada);
+                
             }
         });
         pts = pts.concat(naMeta, abaixoMeta, parada, semConexao);
@@ -192,13 +195,14 @@ router
 
 async function maquinasTask(request){   
     console.log("Entrou na função de thread as " + getToday());
+    console.log("Galpao: " + globalRequest.session.cfg.galpao)
    await axios
    .get(`${process.env.API_URL}/idw/rest/injet/monitorizacao/turnoAtual`)
    .then(turnoAtual => {
        axios.post(`${process.env.API_URL}/idw/rest/injet/monitorizacao`, {
            idTurno: turnoAtual.data.idTurno,
            filtroOp: 0,
-           cdGt: request.session.cfg.galpao,
+           cdGt: globalRequest.session.cfg.galpao,
            turnoAtual: true,
            dtReferencia: `${data.day(new Date())}/${data.getMonth(new Date())}/${data.getYear(new Date())}`
        })

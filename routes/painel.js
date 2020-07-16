@@ -86,6 +86,8 @@ module.exports = router;
     request.session.cfg.logo = logo.hasLogo();
     request.session.cfg.tempo_trans = time.getTime(request.body.tempo_trans);
 
+    console.log(request.session.cfg.galpao)
+
     //produtividadeTask(request);
 
     if (request.session.paineis.maquinas == true)
