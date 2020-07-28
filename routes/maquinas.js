@@ -38,7 +38,7 @@ router
     axios
     .get(`${process.env.API_URL}/idw/rest/injet/monitorizacao/turnoAtual`)
     .then(turnoAtual => {
-        axios.post(`${process.env.API_URL}/idw/rest/injet/monitorizacao`, {
+        axios.post(`${process.env.API_URL}/idw/rest/v2/injet/monitorizacao/postosativos`, {
             idTurno: turnoAtual.data.idTurno,
             filtroOp: 0,
             cdGt: request.session.cfg.galpao,
@@ -50,6 +50,7 @@ router
             ultimaAtualizacao = getToday()
             let abaixoMeta = [], semConexao = [], naMeta = [], parada = [], pts = [], pts_ = [];
             res.data.pts.forEach(pt => {
+
                 if(pt.dsProduto !== undefined) {
                     if(pt.dsProduto.indexOf('\n') !== -1)
                         pt.dsProduto = pt.dsProduto.substring(0, pt.dsProduto.indexOf('\n'));
@@ -59,14 +60,17 @@ router
                     pt.icone.caminhoIcone = '#f1c40f';
                     abaixoMeta.push(pt);
                 }
+
                 if(pt.icone.caminhoIcone.includes('SemConexao')) {
                     pt.icone.caminhoIcone = '#7f8c8d';
                     semConexao.push(pt);
                 }
+
                 if(pt.icone.caminhoIcone.includes('NaMeta')) {
                     pt.icone.caminhoIcone = '#4cd137';
                     naMeta.push(pt);
                 }
+
                 if(pt.icone.caminhoIcone.includes('Parada')) {
                     pt.icone.caminhoIcone = '#c0392b';
                     parada.push(pt);
@@ -179,7 +183,7 @@ router
     axios
     .get(`${process.env.API_URL}/idw/rest/injet/monitorizacao/turnoAtual`)
     .then(turnoAtual => {
-        axios.post(`${process.env.API_URL}/idw/rest/injet/monitorizacao`, {
+        axios.post(`${process.env.API_URL}/idw/rest/v2/injet/monitorizacao/postosativos`, {
             idTurno: turnoAtual.data.idTurno,
             filtroOp: 0,
             cdGt: request.body.galpao,
@@ -199,7 +203,7 @@ async function maquinasTask(request){
    await axios
    .get(`${process.env.API_URL}/idw/rest/injet/monitorizacao/turnoAtual`)
    .then(turnoAtual => {
-       axios.post(`${process.env.API_URL}/idw/rest/injet/monitorizacao`, {
+       axios.post(`${process.env.API_URL}/idw/rest/v2/injet/monitorizacao/postosativos`, {
            idTurno: turnoAtual.data.idTurno,
            filtroOp: 0,
            cdGt: globalRequest.session.cfg.galpao,
