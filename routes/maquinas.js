@@ -115,7 +115,8 @@ router
     }else{
         globalRequest = request
         let abaixoMeta = [], semConexao = [], naMeta = [], parada = [], pts = [], pts_ = [];
-        console.log("Entrou so else");
+        
+        console.log("Entrou so else maquina");        
        
         ptsGlobal.data.pts.forEach(pt => {
           
@@ -167,6 +168,7 @@ router
                 pts = pts_;
             }
         }
+        console.log(pts)
         contador++;
         response.status(200).render('maquinas', { 
             pts: pts, 
