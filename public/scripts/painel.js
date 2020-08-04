@@ -35,7 +35,7 @@ if (localStorage.getItem('cliente')) {
     // });
 }
 
-var ip = "http://170.10.0.214:8080";
+var ip = "http://170.10.0.143:8080";
 
 $('form').submit(function (event) {
     event.preventDefault();
@@ -64,6 +64,7 @@ $('#galpao').change(e => {
     paradasTemp = $('#painelParadas').val();
 
     $('#preloader').fadeIn().toggleClass('hide');
+
     axios.get(ip+`/idw/rest/injet/pts/ativoByGalpao`, {
         params: {
             gt:galpaoTemp
@@ -71,8 +72,15 @@ $('#galpao').change(e => {
     })
     .then(response => {
         console.log("gt " + galpaoTemp)
+       
         $('#preloader').fadeOut().toggleClass('hide');
-        response.data.pts.forEach(pt => $('#maquinas').append(`<option value='${pt.cdPt}'>${pt.cdPt}</option>`));
+
+        $('#maquinas').find('option').remove().end();
+        
+        response.data.pts.forEach(pt =>  {
+            console.log("pts " + pt.cdPt) ;
+            $('#maquinas').append(`<option value='${pt.cdPt}'>${pt.cdPt}</option>`);
+        });
         $('select').formSelect();
     })
     .catch(err => {
