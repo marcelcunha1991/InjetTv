@@ -47,7 +47,7 @@ function getToday(){
 
                 setInterval(function(){  
                     produtividadeTask(request);
-                }, 150000);
+                }, 75000);
             
 
                 axios
