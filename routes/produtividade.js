@@ -65,7 +65,7 @@ function getToday(){
                     axios
                     .all([
                         axios.post(ip+`/idw/rest/injet/bi/resumoBI`, {
-                            cdGalpao: request.session.cfg.galpao,
+                            cdGt: request.session.cfg.galpao,
                             agrupamentoBI: 2,
                             cdTurno: turnoAtual.data.cdTurno,
                             // dtIni: dataTeste,
@@ -78,7 +78,7 @@ function getToday(){
                             mesIni: retornaMes(),
                             anoFim: data.getYear(new Date()),
                             mesFim: retornaMes(),
-                            cdGalpao: request.session.cfg.galpao,
+                            cdGt: request.session.cfg.galpao,
                             agrupamentoBI: 1,
                         }),
                         axios.get(ip+`/idw/rest/injet/monitorizacao/turnos`)
