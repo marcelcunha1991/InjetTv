@@ -142,7 +142,7 @@ async function produtividadeTask(request){
                 axios
                 .all([
                     axios.post(`${process.env.API_URL}/idw/rest/injet/bi/resumoBI`, {
-                        cdGalpao: globalRequest.session.cfg.galpao,
+                        cdGt: globalRequest.session.cfg.galpao,
                         agrupamentoBI: 2,
                         cdTurno: turnoAtual.data.cdTurno,                            
                         dtIni: data.getYear(new Date()) + "-" + retornaMes() +  "-" + data.day(new Date()),
@@ -153,7 +153,7 @@ async function produtividadeTask(request){
                         mesIni: retornaMes(),
                         anoFim: data.getYear(new Date()),
                         mesFim: retornaMes(),
-                        cdGalpao: globalRequest.session.cfg.galpao,
+                        cdGt: globalRequest.session.cfg.galpao,
                         agrupamentoBI: 1,
                     }),
                     axios.get(`${process.env.API_URL}/idw/rest/injet/monitorizacao/turnos`)
