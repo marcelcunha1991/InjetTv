@@ -7,7 +7,7 @@ const express = require('express'),
     json = require('flatted')
 
 var turnoAtualVar;
-const ip = "http://25.83.234.121:8080";
+const ip = "http://170.10.0.143:8080";
 const dataTeste = "2020-01-21";
 
 var contador = 0;
@@ -47,7 +47,7 @@ function getToday(){
 
                 setInterval(function(){  
                     produtividadeTask(request);
-                }, 600000);
+                }, 75000);
             
 
                 axios
@@ -65,7 +65,7 @@ function getToday(){
                     axios
                     .all([
                         axios.post(ip+`/idw/rest/injet/bi/resumoBI`, {
-                            cdGalpao: request.session.cfg.galpao,
+                            cdGt: request.session.cfg.galpao,
                             agrupamentoBI: 2,
                             cdTurno: turnoAtual.data.cdTurno,
                             // dtIni: dataTeste,
@@ -78,7 +78,7 @@ function getToday(){
                             mesIni: retornaMes(),
                             anoFim: data.getYear(new Date()),
                             mesFim: retornaMes(),
-                            cdGalpao: request.session.cfg.galpao,
+                            cdGt: request.session.cfg.galpao,
                             agrupamentoBI: 1,
                         }),
                         axios.get(ip+`/idw/rest/injet/monitorizacao/turnos`)
@@ -116,7 +116,7 @@ function getToday(){
             }else{
 
                 globalRequest = request;
-
+              
                 response.status(200).render('produtividade', {
                     velocimetro: velocimetroGlobal.data,
                     bi: biGlobal.data,
@@ -142,7 +142,7 @@ async function produtividadeTask(request){
                 axios
                 .all([
                     axios.post(`${process.env.API_URL}/idw/rest/injet/bi/resumoBI`, {
-                        cdGalpao: globalRequest.session.cfg.galpao,
+                        cdGt: globalRequest.session.cfg.galpao,
                         agrupamentoBI: 2,
                         cdTurno: turnoAtual.data.cdTurno,                            
                         dtIni: data.getYear(new Date()) + "-" + retornaMes() +  "-" + data.day(new Date()),
@@ -153,7 +153,7 @@ async function produtividadeTask(request){
                         mesIni: retornaMes(),
                         anoFim: data.getYear(new Date()),
                         mesFim: retornaMes(),
-                        cdGalpao: globalRequest.session.cfg.galpao,
+                        cdGt: globalRequest.session.cfg.galpao,
                         agrupamentoBI: 1,
                     }),
                     axios.get(`${process.env.API_URL}/idw/rest/injet/monitorizacao/turnos`)
@@ -177,4 +177,3 @@ async function produtividadeTask(request){
 
 
 module.exports = router;
-
