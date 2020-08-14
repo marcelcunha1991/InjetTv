@@ -32,7 +32,7 @@ if(process.env.TRIAL == "true"){
         console.log("fora de trial")
     }else{
     router.get('/', (request, response, next) => {
-    axios.get(`${process.env.API_URL}/idw/rest/injet/gts/monitorizacao`)
+    axios.get(`${process.env.API_URL}/idw/rest/injet/bi/filtrosBI/grupoPTsAtivos`)
     .then(gts => response.status(200).render('painel', {gts: gts.data.gts, configPath: `${process.env.APP_URL}:${process.env.PORT}`, logo: logo.hasLogo()}))
     .catch(error => response.status(500).send('Erro ao pegar máquinas. Tente novamente mais tarde. ' + error));
 })
@@ -50,7 +50,7 @@ if(process.env.TRIAL == "true"){
     request.session.cfg.logo = logo.hasLogo();
     request.session.cfg.tempo_trans = time.getTime(request.body.tempo_trans);
 
-    //produtividadeTask(request);
+    console.log("CdGt " + request.session.cfg.galpao)
 
     if(request.session.paineis.produtividade == true)
         response.redirect('/produtividade');
@@ -68,7 +68,7 @@ module.exports = router;
 }else{
     console.log("Não Trial")
     router.get('/', (request, response, next) => {
-    axios.get(`${process.env.API_URL}/idw/rest/injet/gts/monitorizacao`)
+    axios.get(`${process.env.API_URL}/idw/rest/injet/bi/filtrosBI/grupoPTsAtivos`)
     .then(gts => response.status(200).render('painel', {gts: gts.data.gts, configPath: `${process.env.APP_URL}:${process.env.PORT}`, logo: logo.hasLogo()}))
     .catch(error => response.status(500).send('Erro ao pegar máquinas. Tente novamente mais tarde. ' + error));
 })
@@ -86,7 +86,7 @@ module.exports = router;
     request.session.cfg.logo = logo.hasLogo();
     request.session.cfg.tempo_trans = time.getTime(request.body.tempo_trans);
 
-    console.log(request.session.cfg.galpao)
+    console.log("CdGt " + request.session.cfg.galpao)
 
     //produtividadeTask(request);
 
