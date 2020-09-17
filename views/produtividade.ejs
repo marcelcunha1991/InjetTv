@@ -74,9 +74,10 @@
                             <table class="centered striped">
                                 <thead>
                                     <th></th>
-                                    <% turnos.forEach(function(turno){ %>
-                                        <th><%=turno.dsTurno%></th>
+                                    <% bi.indicadoresTurno.forEach(function(indicadoresTurno){ %>
+                                        <td><%=indicadoresTurno.dsTurno%>%</td>
                                     <% }); %>
+                                    
                                     <th>Acumulado mês</th>
                                 </thead>
                                 <tbody>
