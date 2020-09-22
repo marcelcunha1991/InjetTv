@@ -71,7 +71,11 @@ $('#galpao').change(e => {
     })
     .then(response => {
         console.log("gt " + galpaoTemp)
+
         $('#preloader').fadeOut().toggleClass('hide');
+
+        $('#maquinas').find('option').remove().end();
+  
         response.data.pts.forEach(pt => $('#maquinas').append(`<option value='${pt.cdPt}'>${pt.cdPt}</option>`));
         $('select').formSelect();
     })
