@@ -25,7 +25,7 @@
                             </button>
                     </div>
                   
-                <h1 class=center-align>Produtividade - <%= galpao %> <span id=galpao></span></h1>
+                <h1 class=center-align>Produtividade - <%=galpao%> <span id=galpao></span></h1>
                 <div>
                     <div class="row speedometer">
                         <div class="col l3">
@@ -35,11 +35,7 @@
                                 </div>
                             </div>
                             <div class="row center-align">
-                                <% if (<%=velocimetro.indicadores%> != "undefined") { %>
-                                    <strong>Eficiência (<span id=eficienciaValue><%=velocimetro.indicadores.eficiencia%></span>)</strong>
-                                <% }else{ %>
-                                    <strong>Eficiência (<span id=eficienciaValue>0</span>)</strong>       
-                                <% } %>                                
+                                <strong>Eficiência (<span id=eficienciaValue><%=velocimetro.indicadores.eficiencia%></span>)</strong>
                             </div>
                         </div>
                         <div class="col l3">
@@ -49,12 +45,7 @@
                                 </div>
                             </div>
                             <div class="row center-align">
-                                <% if (<%=velocimetro.indicadores%> != "undefined") { %>
-                                    <strong>OEE (<span id=oeeValue><%=velocimetro.indicadores.indOEE%></span>)</strong>
-                                <% }else{ %>
-                                    <strong>OEE (<span id=oeeValue>0</span>)</strong>    
-                                <% } %>       
-                                
+                                <strong>OEE (<span id=oeeValue><%=velocimetro.indicadores.indOEE%></span>)</strong>
                             </div>
                         </div>
                         <div class="col l3">
@@ -64,12 +55,7 @@
                                 </div>
                             </div>
                             <div class="row center-align">
-                                <% if (<%=velocimetro.indicadores%> != "undefined") { %>
-                                    <strong>Utilização (<span id=utilizacaoValue><%=velocimetro.indicadores.indUtilizacao%></span>)</strong>
-                                <% }else{ %>
-                                    <strong>Utilização (<span id=utilizacaoValue>0</span>)</strong>
-                                <% } %>     
-                                
+                                <strong>Utilização (<span id=utilizacaoValue><%=velocimetro.indicadores.indUtilizacao%></span>)</strong>
                             </div>
                         </div>
                         <div class="col l3">
@@ -79,11 +65,7 @@
                                 </div>
                             </div>
                             <div class="row center-align">
-                                <% if (<%=velocimetro.indicadores%> != "undefined") { %>
-                                    <strong>Refugo (<span id=refugoValue><%=velocimetro.indicadores.indRef%></span>)</strong>
-                                <% }else{ %>
-                                    <strong>Refugo (<span id=refugoValue>0</span>)</strong>
-                                <% } %>                                     
+                                <strong>Refugo (<span id=refugoValue><%=velocimetro.indicadores.indRef%></span>)</strong>
                             </div>
                         </div>
                     </div>

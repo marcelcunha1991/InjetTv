@@ -93,7 +93,7 @@ $('#galpao').change(e => {
     };
    
     // localStorage.setItem("cliente", JSON.stringify(cliente));
-    console.log(cliente);
+    // console.log(cliente);
     return true;
 
 
