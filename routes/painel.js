@@ -11,20 +11,7 @@ const express = require('express'),
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
  
-    today = dd + '/' + mm + '/' + yyyy;
-
-    function retornaMes(){
-
-        if (data.getMonth(new Date()) < 10){
-
-            return "0" + data.getMonth(new Date())
-        } else{
-
-            return data.getMonth(new Date())
-        }
-}    
-
-    
+    today = dd + '/' + mm + '/' + yyyy;   
 
 if(process.env.TRIAL == "true"){
 
@@ -49,8 +36,6 @@ if(process.env.TRIAL == "true"){
     request.session.cfg = request.body;
     request.session.cfg.logo = logo.hasLogo();
     request.session.cfg.tempo_trans = time.getTime(request.body.tempo_trans);
-
-    //produtividadeTask(request);
 
     if(request.session.paineis.produtividade == true)
         response.redirect('/produtividade');
@@ -86,9 +71,6 @@ module.exports = router;
     request.session.cfg.logo = logo.hasLogo();
     request.session.cfg.tempo_trans = time.getTime(request.body.tempo_trans);
 
-    console.log(request.session.cfg.galpao)
-
-    //produtividadeTask(request);
 
     if (request.session.paineis.maquinas == true)
         response.redirect('/maquinas');
