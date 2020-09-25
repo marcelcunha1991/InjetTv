@@ -7,7 +7,7 @@ const express = require('express'),
     json = require('flatted')
 
 var turnoAtualVar;
-const ip = "http://10.4.100.2:8080";
+const ip = "http://10.99.0.108:8080";
 const dataTeste = "2020-01-21";
 
 var contador = 0;
@@ -97,6 +97,7 @@ function getToday(){
                             velocimetro: velocimetro.data,
                             bi: bi.data,
                             turnos: turnos.data.turnos,
+                            galpao = request.session.cfg.galpao,
                             secondsTransition: request.session.cfg.tempo_trans,
                             cor_fundo: request.session.cfg.cor_fundo,
                             nextPage: panel.switch(request.baseUrl, request.session.paineis),
@@ -121,6 +122,7 @@ function getToday(){
                     velocimetro: velocimetroGlobal.data,
                     bi: biGlobal.data,
                     turnos: turnoGlobal.data.turnos,
+                    galpao = request.session.cfg.galpao,
                     secondsTransition: request.session.cfg.tempo_trans,
                     cor_fundo: request.session.cfg.cor_fundo,
                     nextPage: panel.switch(request.baseUrl, request.session.paineis),
@@ -162,6 +164,7 @@ async function produtividadeTask(request){
                                          
                         velocimetroGlobal = velocimetro;
                         biGlobal = bi;
+                        galpao = globalRequest.session.cfg.galpao,
                         turnoGlobal = turnos;  
                         ultimaAtualizacao = getToday();
                   
