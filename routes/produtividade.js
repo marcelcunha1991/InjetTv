@@ -65,7 +65,7 @@ function getToday(){
                     axios
                     .all([
                         axios.post(ip+`/idw/rest/injet/bi/resumoBI`, {
-                            cdGt: request.session.cfg.galpao,
+                            cdGalpao: request.session.cfg.galpao,
                             agrupamentoBI: 2,
                             cdTurno: turnoAtual.data.cdTurno,
                             // dtIni: dataTeste,
@@ -78,7 +78,7 @@ function getToday(){
                             mesIni: retornaMes(),
                             anoFim: data.getYear(new Date()),
                             mesFim: retornaMes(),
-                            cdGt: request.session.cfg.galpao,
+                            cdGalpao: request.session.cfg.galpao,
                             agrupamentoBI: 1,
                         }),
                         axios.get(ip+`/idw/rest/injet/monitorizacao/turnos`)
@@ -144,7 +144,7 @@ async function produtividadeTask(request){
                 axios
                 .all([
                     axios.post(`${process.env.API_URL}/idw/rest/injet/bi/resumoBI`, {
-                        cdGt: globalRequest.session.cfg.galpao,
+                        cdGalpao: globalRequest.session.cfg.galpao,
                         agrupamentoBI: 2,
                         cdTurno: turnoAtual.data.cdTurno,                            
                         dtIni: data.getYear(new Date()) + "-" + retornaMes() +  "-" + data.day(new Date()),
@@ -155,7 +155,7 @@ async function produtividadeTask(request){
                         mesIni: retornaMes(),
                         anoFim: data.getYear(new Date()),
                         mesFim: retornaMes(),
-                        cdGt: globalRequest.session.cfg.galpao,
+                        cdGalpao: globalRequest.session.cfg.galpao,
                         agrupamentoBI: 1,
                     }),
                     axios.get(`${process.env.API_URL}/idw/rest/injet/monitorizacao/turnos`)
