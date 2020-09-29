@@ -73,9 +73,15 @@ $('#galpao').change(e => {
         console.log("gt " + galpaoTemp)
 
         $('#preloader').fadeOut().toggleClass('hide');
+        
+        $('#maquinas').find('option').remove().end();      
+        
+        console.log("Galpao "  +$("#galpao option:selected").html())
 
-        $('#maquinas').find('option').remove().end();
-  
+        $('#dsGt').val($("#galpao option:selected").html());
+ 
+        console.log("Valor do campo dsGt " + $("#dsGt").val())
+
         response.data.pts.forEach(pt => $('#maquinas').append(`<option value='${pt.cdPt}'>${pt.cdPt}</option>`));
         $('select').formSelect();
     })
@@ -92,7 +98,7 @@ $('#galpao').change(e => {
         path_logo: ''
     };
    
-    // localStorage.setItem("cliente", JSON.stringify(cliente));
+    // localStorage.setItem("galpao", $("#galpao").val());
     // console.log(cliente);
     return true;
 

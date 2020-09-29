@@ -59,8 +59,9 @@
                     <span>Mostrar Grupo / Máquinas</span>
                 </div>
                 <div class="input-field col xl6">
+                    <input type="hidden" id="dsGt" name="dsGt" value="">
                     <select id=galpao name=galpao>
-                        <option value="" disabled selected>Escolha o Grupo de Trabalho</option>
+                        <option value="" disabled selected>Escolha o Grupo de Trabalho</option>                       
                         <% gts.forEach(function(gt) { %>
                             <option value="<%=gt.cdGt%>" name="<%=gt.dsGt%>"><%=gt.dsGt%></option>
                         <% }); %>

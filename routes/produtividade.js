@@ -41,13 +41,13 @@ function getToday(){
 
         router
         .get('/', (request, response, next) => {
-            if(contador == 0) { 
+            // if(contador == 0) { 
             
-                globalRequest = request;
+            //     // globalRequest = request;
 
-                setInterval(function(){  
-                    produtividadeTask(request);
-                }, 150000);
+            //     setInterval(function(){  
+            //         produtividadeTask(request);
+            //     }, 150000);
             
 
                 axios
@@ -97,7 +97,7 @@ function getToday(){
                             velocimetro: velocimetro.data,
                             bi: bi.data,
                             turnos: turnos.data.turnos,
-                            galpao : request.session.cfg.galpao,
+                            galpao : request.session.cfg.dsGt,
                             secondsTransition: request.session.cfg.tempo_trans,
                             cor_fundo: request.session.cfg.cor_fundo,
                             nextPage: panel.switch(request.baseUrl, request.session.paineis),
@@ -114,23 +114,23 @@ function getToday(){
                 .catch(errorTurnoAtual => response.status(500).render('error', {error: json.stringify(errorTurnoAtual)}));
     
             
-            }else{
+            // }else{
 
-                globalRequest = request;
+            //     globalRequest = request;
               
-                response.status(200).render('produtividade', {
-                    velocimetro: velocimetroGlobal.data,
-                    bi: biGlobal.data,
-                    turnos: turnoGlobal.data.turnos,
-                    galpao : request.session.cfg.galpao,
-                    secondsTransition: request.session.cfg.tempo_trans,
-                    cor_fundo: request.session.cfg.cor_fundo,
-                    nextPage: panel.switch(request.baseUrl, request.session.paineis),
-                    logo: logo.hasLogo(),
-                    ultimaAtualizacao : ultimaAtualizacao
-                });
+            //     response.status(200).render('produtividade', {
+            //         velocimetro: velocimetroGlobal.data,
+            //         bi: biGlobal.data,
+            //         turnos: turnoGlobal.data.turnos,
+            //         galpao : request.session.cfg.galpao,
+            //         secondsTransition: request.session.cfg.tempo_trans,
+            //         cor_fundo: request.session.cfg.cor_fundo,
+            //         nextPage: panel.switch(request.baseUrl, request.session.paineis),
+            //         logo: logo.hasLogo(),
+            //         ultimaAtualizacao : ultimaAtualizacao
+            //     });
 
-            }           
+            // }           
 
         });
 
@@ -144,7 +144,7 @@ async function produtividadeTask(request){
                 axios
                 .all([
                     axios.post(`${process.env.API_URL}/idw/rest/injet/bi/resumoBI`, {
-                        cdGalpao: globalRequest.session.cfg.galpao,
+                        cdGalpao: request.session.cfg.galpao,
                         agrupamentoBI: 2,
                         cdTurno: turnoAtual.data.cdTurno,                            
                         dtIni: data.getYear(new Date()) + "-" + retornaMes() +  "-" + data.day(new Date()),
@@ -155,7 +155,7 @@ async function produtividadeTask(request){
                         mesIni: retornaMes(),
                         anoFim: data.getYear(new Date()),
                         mesFim: retornaMes(),
-                        cdGalpao: globalRequest.session.cfg.galpao,
+                        cdGalpao: request.session.cfg.galpao,
                         agrupamentoBI: 1,
                     }),
                     axios.get(`${process.env.API_URL}/idw/rest/injet/monitorizacao/turnos`)
@@ -164,7 +164,7 @@ async function produtividadeTask(request){
                                          
                         velocimetroGlobal = velocimetro;
                         biGlobal = bi;
-                        galpao = globalRequest.session.cfg.galpao,
+                        galpao = request.session.cfg.dsGt,
                         turnoGlobal = turnos;  
                         ultimaAtualizacao = getToday();
                   

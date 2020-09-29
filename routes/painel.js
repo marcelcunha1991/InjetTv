@@ -31,9 +31,11 @@ if(process.env.TRIAL == "true"){
             console.log('File uploaded!');
         });
     }
-        
+    console.log("DsGt " + request.body.dsGt);
+    $("#dsGt").val()
     request.session.paineis = panel.selected(request.body);
     request.session.cfg = request.body;
+    request.session.cfg.dsGt = request.body.dsGt;
     request.session.cfg.logo = logo.hasLogo();
     request.session.cfg.tempo_trans = time.getTime(request.body.tempo_trans);
 
