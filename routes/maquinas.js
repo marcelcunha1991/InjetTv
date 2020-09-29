@@ -10,7 +10,7 @@ const express = require('express'),
 var contador = 0;
 var ptsGlobal;
 var ultimaAtualizacao;
-var globalRequest;
+// var globalRequest;
 
 function getToday(){
     var today = new Date();
@@ -27,13 +27,13 @@ router
 .get('/', (request, response, next) => {
     
 
-    if(contador == 0) { 
+    // if(contador == 0) { 
 
-        globalRequest = request;
+    //     globalRequest = request;
 
-        setInterval(function(){ 
-            maquinasTask(request);
-        }, 150000);
+    //     setInterval(function(){ 
+    //         maquinasTask(request);
+    //     }, 150000);
 
     axios
     .get(`${process.env.API_URL}/idw/rest/injet/monitorizacao/turnoAtual`)
@@ -112,71 +112,71 @@ router
     })
     .catch(errorTurnoAtual => response.status(500).send(json.stringify(errorTurnoAtual)));
 
-    }else{
-        globalRequest = request
-        let abaixoMeta = [], semConexao = [], naMeta = [], parada = [], pts = [], pts_ = [];
-        console.log("Entrou so else");
+    // }else{
+    //     globalRequest = request
+    //     let abaixoMeta = [], semConexao = [], naMeta = [], parada = [], pts = [], pts_ = [];
+    //     console.log("Entrou so else");
        
-        ptsGlobal.data.pts.forEach(pt => {
+    //     ptsGlobal.data.pts.forEach(pt => {
           
-            if(pt.dsProduto !== undefined) {
-                if(pt.dsProduto.indexOf('\n') !== -1)
-                    pt.dsProduto = pt.dsProduto.substring(0, pt.dsProduto.indexOf('\n'));
-            }
+    //         if(pt.dsProduto !== undefined) {
+    //             if(pt.dsProduto.indexOf('\n') !== -1)
+    //                 pt.dsProduto = pt.dsProduto.substring(0, pt.dsProduto.indexOf('\n'));
+    //         }
 
-            if(pt.icone.caminhoIcone.includes('f1c40f') || pt.icone.caminhoIcone.includes('AbaixoMeta')) {     
-                pt.icone.caminhoIcone = '#f1c40f';           
-                abaixoMeta.push(pt);
+    //         if(pt.icone.caminhoIcone.includes('f1c40f') || pt.icone.caminhoIcone.includes('AbaixoMeta')) {     
+    //             pt.icone.caminhoIcone = '#f1c40f';           
+    //             abaixoMeta.push(pt);
                
-            }
-            if(pt.icone.caminhoIcone.includes('7f8c8d') || pt.icone.caminhoIcone.includes('SemConexao')) {
-                pt.icone.caminhoIcone = '#7f8c8d';                 
-                semConexao.push(pt);
+    //         }
+    //         if(pt.icone.caminhoIcone.includes('7f8c8d') || pt.icone.caminhoIcone.includes('SemConexao')) {
+    //             pt.icone.caminhoIcone = '#7f8c8d';                 
+    //             semConexao.push(pt);
                 
-            }
-            if(pt.icone.caminhoIcone.includes('4cd137') || pt.icone.caminhoIcone.includes('NaMeta')) { 
-                pt.icone.caminhoIcone = '#4cd137';                   
-                naMeta.push(pt);
+    //         }
+    //         if(pt.icone.caminhoIcone.includes('4cd137') || pt.icone.caminhoIcone.includes('NaMeta')) { 
+    //             pt.icone.caminhoIcone = '#4cd137';                   
+    //             naMeta.push(pt);
                 
-            }
-            if(pt.icone.caminhoIcone.includes('c0392b') || pt.icone.caminhoIcone.includes('Parada')) {    
-                pt.icone.caminhoIcone = '#c0392b';              
-                parada.push(pt);
+    //         }
+    //         if(pt.icone.caminhoIcone.includes('c0392b') || pt.icone.caminhoIcone.includes('Parada')) {    
+    //             pt.icone.caminhoIcone = '#c0392b';              
+    //             parada.push(pt);
                 
-            }
-        });
-        pts = pts.concat(naMeta, abaixoMeta, parada, semConexao);
+    //         }
+    //     });
+    //     pts = pts.concat(naMeta, abaixoMeta, parada, semConexao);
 
-        if(typeof request.session.cfg.maquinas === 'string'  ){            
-            if (request.session.cfg.maquinas) {
-                pts_ = pts_.concat(pts.filter((pt) => {
-                    if (pt.cdPt === request.session.cfg.maquinas) 
-                    return pt;
-                }));
-                pts = pts_;
-            }
-        }
-        if(typeof request.session.cfg.maquinas === 'undefined' || typeof request.session.cfg.maquinas === 'object'  ){            
-            if (request.session.cfg.maquinas) {
-                request.session.cfg.maquinas.forEach((maquina) => {
-                    pts_ = pts_.concat(pts.filter((pt) => {
-                        if (pt.cdPt === maquina) 
-                        return pt;
-                    }));
-                });
-                pts = pts_;
-            }
-        }
-        contador++;
-        response.status(200).render('maquinas', { 
-            pts: pts, 
-            secondsTransition: request.session.cfg.tempo_trans, 
-            cor_fundo: request.session.cfg.cor_fundo, 
-            nextPage: panel.switch(request.baseUrl, request.session.paineis), 
-            logo: logo.hasLogo(),
-            ultimaAtualizacao : ultimaAtualizacao
-        });
-    }
+    //     if(typeof request.session.cfg.maquinas === 'string'  ){            
+    //         if (request.session.cfg.maquinas) {
+    //             pts_ = pts_.concat(pts.filter((pt) => {
+    //                 if (pt.cdPt === request.session.cfg.maquinas) 
+    //                 return pt;
+    //             }));
+    //             pts = pts_;
+    //         }
+    //     }
+    //     if(typeof request.session.cfg.maquinas === 'undefined' || typeof request.session.cfg.maquinas === 'object'  ){            
+    //         if (request.session.cfg.maquinas) {
+    //             request.session.cfg.maquinas.forEach((maquina) => {
+    //                 pts_ = pts_.concat(pts.filter((pt) => {
+    //                     if (pt.cdPt === maquina) 
+    //                     return pt;
+    //                 }));
+    //             });
+    //             pts = pts_;
+    //         }
+    //     }
+    //     contador++;
+    //     response.status(200).render('maquinas', { 
+    //         pts: pts, 
+    //         secondsTransition: request.session.cfg.tempo_trans, 
+    //         cor_fundo: request.session.cfg.cor_fundo, 
+    //         nextPage: panel.switch(request.baseUrl, request.session.paineis), 
+    //         logo: logo.hasLogo(),
+    //         ultimaAtualizacao : ultimaAtualizacao
+    //     });
+    // }
     
 })
 .post('/search', (request, response, next) => {
