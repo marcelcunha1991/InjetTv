@@ -48,38 +48,29 @@ function getToday(){
             //     setInterval(function(){  
             //         produtividadeTask(request);
             //     }, 150000);
-            
 
+            var today = new Date();
+            var lastDayOfMonth = new Date(today.getFullYear(), today.getMonth()+1, 0);
+            console.log("ultimo dia do mes " + lastDayOfMonth)
                 axios
                 .get(ip+`/idw/rest/injet/monitorizacao/turnoAtual`)
                 .then(turnoAtual => {
-                    console.log("Fez chamada de produtividade na pela primeira vez as " + getToday());
-                   
-                    console.log("Iniciando Chamada pela primeira vez");
-                    console.log(retornaMes())
-                    console.log(`${data.getYear(new Date())}-`+ retornaMes() +`-${data.day(new Date())}`)
-                    console.log(`${data.getYear(new Date())}-${data.getMonth(new Date())}-${data.day(new Date())}`)
-                    console.log(request.session.cfg.galpao)
-                    console.log(turnoAtual.data.cdTurno)
+                    console.log(data.getYear(new Date()) + "-" + retornaMes() +  "-" + lastDayOfMonth.getDate())
                     turnoAtualVar = turnoAtual.data.cdTurno
                     axios
                     .all([
                         axios.post(ip+`/idw/rest/injet/bi/resumoBI`, {
                             cdGalpao: request.session.cfg.galpao,
                             agrupamentoBI: 2,
-                            cdTurno: turnoAtual.data.cdTurno,
-                            // dtIni: dataTeste,
-                            // dtFim: dataTeste
+                            cdTurno: turnoAtual.data.cdTurno,             
                             dtIni: data.getYear(new Date()) + "-" + retornaMes() +  "-" + data.day(new Date()),
                             dtFim: data.getYear(new Date()) + "-" + retornaMes() +  "-" + data.day(new Date())
                         }),
                         axios.post(ip+`/idw/rest/injet/bi/resumoBI`, {                
-                            anoIni: data.getYear(new Date()),
-                            mesIni: retornaMes(),
-                            anoFim: data.getYear(new Date()),
-                            mesFim: retornaMes(),
+                            dtIni: data.getYear(new Date()) + "-" + retornaMes() +  "-" + "01",
+                            dtFim: data.getYear(new Date()) + "-" + retornaMes() +  "-" + lastDayOfMonth.getDate(),
                             cdGalpao: request.session.cfg.galpao,
-                            agrupamentoBI: 1,
+                            agrupamentoBI: 2
                         }),
                         axios.get(ip+`/idw/rest/injet/monitorizacao/turnos`)
                     ])
