@@ -35,7 +35,7 @@ $(() => $('select').formSelect());
 //     // });
 // }
 
-var ip = "http://10.99.0.108:8080";
+var ip = "http://idw.tutiplast.com.br:8080";
 
 $('form').submit(function (event) {
     event.preventDefault();

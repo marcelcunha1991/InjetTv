@@ -11,11 +11,19 @@ const express = require('express'),
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
  
-    today = dd + '/' + mm + '/' + yyyy;   
+    // today = dd + '/' + mm + '/' + yyyy;   
+    today = yyyy + "-" + mm + "-" +dd;   
+
+console.log(today)
+
+console.log(process.env.DATA_FINAL)
+
+var x = new Date(today);
+var y = new Date(process.env.DATA_FINAL);
 
 if(process.env.TRIAL == "true"){
 
-    if(process.env.DATA_FINAL < today ){
+    if(y < x ){
         console.log("fora de trial")
     }else{
     router.get('/', (request, response, next) => {

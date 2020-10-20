@@ -7,7 +7,7 @@ const express = require('express'),
     json = require('flatted')
 
 var turnoAtualVar;
-const ip = "http://10.99.0.108:8080";
+const ip = "http://idw.tutiplast.com.br:8080";
 const dataTeste = "2020-01-21";
 
 var contador = 0;
