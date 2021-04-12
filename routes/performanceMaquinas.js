@@ -13,10 +13,10 @@ var ultimaAtualizacao;
 
 var turnoAtualVar;
 // const ip = "http://idw.tutiplast.com.br:8080";
-const ip = "http://170.10.0.206:8080";
+const ip = "http://170.10.0.203:8090";
 
 var count = 0;
-var velocimetroGlobal;
+var atualGlobal;
 var biGlobal;
 var turnoGlobal;
 var ultimaAtualizacao;
@@ -118,6 +118,7 @@ router
          axios
          .get(ip+`/idw/rest/injet/monitorizacao/turnoAtual`)
          .then(turnoAtual => {
+
                console.log(data.getYear(new Date()) + "-" + retornaMes() +  "-" + lastDayOfMonth.getDate())
                turnoAtualVar = turnoAtual.data.cdTurno
                axios
@@ -125,7 +126,7 @@ router
                   axios.post(ip+`/idw/rest/injet/bi/resumoBI`, {
                      cdGalpao: request.session.cfg.galpao,
                      agrupamentoBI: 2,
-                     cdTurno: turnoAtual.data.cdTurno,             
+                     // cdTurno: turnoAtual.data.cdTurno,             
                      dtIni: data.getYear(new Date()) + "-" + retornaMes() +  "-" + data.day(new Date()),
                      dtFim: data.getYear(new Date()) + "-" + retornaMes() +  "-" + data.day(new Date())
                   }),
@@ -137,14 +138,14 @@ router
                   }),
                   axios.get(ip+`/idw/rest/injet/monitorizacao/turnos`)
                ])
-               .then(axios.spread((velocimetro, bi, turnos) => {   
+               .then(axios.spread((atual, bi, turnos) => {
                   count++;      
-                  velocimetroGlobal = velocimetro;
+                  atualGlobal = atual;
                   biGlobal = bi;
                   turnoGlobal = turnos;
                   ultimaAtualizacao = getToday();
                
-                  console.log("Chamada original "  + velocimetro.data);
+                  console.log("Chamada original "  + atual.data);
 
                   contador++;
                   response.status(200).render('performanceMaquinas', { 
@@ -154,7 +155,7 @@ router
                      nextPage: panel.switch(request.baseUrl, request.session.paineis), 
                      logo: logo.hasLogo(),
                      ultimaAtualizacao: getToday(),
-                     velocimetro: velocimetro.data,
+                     atual: atual.data,
                      bi: bi.data,
                      turnos: turnos.data.turnos,
                      galpao : request.session.cfg.dsGt,
