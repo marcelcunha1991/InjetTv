@@ -46,15 +46,17 @@ if(process.env.TRIAL == "true"){
     request.session.cfg.dsGt = request.body.dsGt;
     request.session.cfg.logo = logo.hasLogo();
     request.session.cfg.tempo_trans = time.getTime(request.body.tempo_trans);
+    console.log(request.session.cfg.tempo_trans);
 
-    if(request.session.paineis.produtividade == true)
-        response.redirect('/produtividade');
-    else if (request.session.paineis.maquinas == true)
-        response.redirect('/maquinas');
-    else
-        response.redirect('/paradas');
+    // if(request.session.paineis.produtividade == true)
+    //     response.redirect('/produtividade');
+    // else if (request.session.paineis.maquinas == true)
+    //     response.redirect('/maquinas');
+    // else
+    //     response.redirect('/paradas');
    
-      
+    if (request.session.paineis.performanceMaquinas == true)
+        response.redirect('/performanceMaquinas');  
 })
 
 
@@ -81,15 +83,15 @@ module.exports = router;
     request.session.cfg.logo = logo.hasLogo();
     request.session.cfg.tempo_trans = time.getTime(request.body.tempo_trans);
 
+    // if (request.session.paineis.maquinas == true)
+    //     response.redirect('/maquinas');
+    // else if(request.session.paineis.produtividade == true)
+    //     response.redirect('/produtividade');
+    // else
+    //     response.redirect('/paradas');
 
-    if (request.session.paineis.maquinas == true)
-        response.redirect('/maquinas');
-    else if(request.session.paineis.produtividade == true)
-        response.redirect('/produtividade');
-    else
-        response.redirect('/paradas');
-   
-
+    if (request.session.paineis.performanceMaquinas == true)
+        response.redirect('/performanceMaquinas');   
 })
 
 module.exports = router;

@@ -35,19 +35,27 @@ $(() => $('select').formSelect());
 //     // });
 // }
 
-var ip = "http://idw.tutiplast.com.br:8080";
+// var ip = "http://idw.tutiplast.com.br:8080";
+var ip = "http://170.10.0.206:8080";
 
 $('form').submit(function (event) {
     event.preventDefault();
     if ($('#galpao').val() !== null) {
-        if (!$('#painelProdutividade').is(':checked') && !$('#painelMaquinas').is(':checked') && !$('#painelParadas').is(':checked'))
-            M.toast({ html: 'Por favor, selecione ao menos um painel para exibir!', displayLength: 2000 });
-        else {
-            $('#preloader').fadeIn().toggleClass('hide');
+        // if (!$('#painelProdutividade').is(':checked') && !$('#painelMaquinas').is(':checked') && !$('#painelParadas').is(':checked') && !$('#painelPerformanceMaquinas').is(':checked'))
+        //     M.toast({ html: 'Por favor, selecione ao menos um painel para exibir!', displayLength: 2000 });
+        // else {
+        //     $('#preloader').fadeIn().toggleClass('hide');
+        //     $(this).unbind('submit').submit();
+        // };
+        if ($('#painelPerformanceMaquinas').is(':checked')) {
             $(this).unbind('submit').submit();
-        };
+        }
+
     } else
         M.toast({ html: 'Por favor, um grupo de trabalho para continuar!', displayLength: 2000 });
+
+    // if ($('#galpao').val() === null)
+    //     M.toast({ html: 'Por favor, um grupo de trabalho para continuar!', displayLength: 2000 });
 });
 
 
@@ -57,11 +65,13 @@ $('#galpao').change(e => {
     var produtividadeTemp;
     var maquinasTemp;
     var paradasTemp;
+    var painelPerformanceMaquinas;
 
     galpaoTemp = $('#galpao').val();
     produtividadeTemp = $('#painelProdutividade').val();
     maquinasTemp = $('#painelMaquinas').val();
     paradasTemp = $('#painelParadas').val();
+    painelPerformanceMaquinas = $('#painelPerformanceMaquinas').val();
 
     $('#preloader').fadeIn().toggleClass('hide');
     axios.get(ip+`/idw/rest/injet/pts/ativoByGalpao`, {
@@ -94,6 +104,7 @@ $('#galpao').change(e => {
         produtividade: $('#painelProdutividade').is(':checked'),
         maquinas: $('#painelMaquinas').is(':checked'),
         paradas: $("#painelParadas").is(':checked'),
+        painelPerformanceMaquinas: $("#painelPerformanceMaquinas").is(':checked'),
         cor_fundo: '#ffffff',
         path_logo: ''
     };

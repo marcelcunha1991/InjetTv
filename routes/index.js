@@ -3,6 +3,7 @@ const produtividade = require('./produtividade'),
     painel = require('./painel'),
     injettv = require('./injettv'),
     paradas = require('./paradas'),
+    performanceMaquinas = require('./performanceMaquinas'),
     redirect = require('./redirect');
 
 module.exports = (app) => {
@@ -12,5 +13,6 @@ module.exports = (app) => {
     .use('/painel', painel)
     .use('/injettv', injettv)
     .use('/paradas', paradas)
+    .use('/performanceMaquinas', performanceMaquinas)
     .use('/', redirect);
 };

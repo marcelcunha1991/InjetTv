@@ -7,7 +7,8 @@ const express = require('express'),
     json = require('flatted')
 
 var turnoAtualVar;
-const ip = "http://idw.tutiplast.com.br:8080";
+// const ip = "http://idw.tutiplast.com.br:8080";
+const ip = "http://170.10.0.206:8080";
 const dataTeste = "2020-01-21";
 
 var contador = 0;
@@ -74,8 +75,7 @@ function getToday(){
                         }),
                         axios.get(ip+`/idw/rest/injet/monitorizacao/turnos`)
                     ])
-                    .then(axios.spread((velocimetro, bi, turnos) => {       
-                        
+                    .then(axios.spread((velocimetro, bi, turnos) => {
                         contador++;      
                         velocimetroGlobal = velocimetro;
                         biGlobal = bi;

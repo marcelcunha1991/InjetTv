@@ -1,6 +1,6 @@
 module.exports = {
     verify: (request, response, next) => {
-        
+        console.log(request);
         if(request.body.paineis.produtividade || request.body.paineis.detalhe || request.body.paineis.maquinas)
         next();
         else
@@ -13,37 +13,50 @@ module.exports = {
     },
     selected: (paineis) => {
         let panels = {};
-        if(paineis.painelProdutividade == 'on')
-            panels.produtividade = true;
+        // if(paineis.painelProdutividade == 'on') {}
+        //     panels.produtividade = true;
 
-        if(paineis.painelMaquinas == 'on')
-            panels.maquinas = true;
+        // if(paineis.painelMaquinas == 'on')
+        //     panels.maquinas = true;
 
-        if(paineis.painelParadas == 'on')
-            panels.paradas = true;
+        // if(paineis.painelParadas == 'on')
+        //     panels.paradas = true;
+
+        if(paineis.painelPerformanceMaquinas == 'on')
+            panels.performanceMaquinas = true;
 
         return panels;
     },
     switch: (path, paineis) => {
-        if(path.includes('produtividade')) {
-            if(paineis.paradas) return 'paradas';
-            if(paineis.maquinas) return 'maquinas';
+        // if(path.includes('produtividade')) {
+        //     console.log(path);
+        //     if(paineis.paradas) return 'paradas';
+        //     if(paineis.maquinas) return 'maquinas';
 
-            return 'produtividade';
-        }
+        //     return 'produtividade';
+        // }
 
-        if(path.includes('maquinas')) {
-            if(paineis.produtividade) return 'produtividade';
-            if(paineis.paradas) return 'paradas';
+        // if(path.includes('maquinas')) {
+        //     console.log(path);
+        //     if(paineis.produtividade) return 'produtividade';
+        //     if(paineis.paradas) return 'paradas';
 
-            return 'maquinas';
-        }
+        //     return 'maquinas';
+        // }
 
-        if(path.includes('paradas')) {
-            if(paineis.maquinas) return 'maquinas';
-            if(paineis.produtividade) return 'produtividade';
+        // if(path.includes('paradas')) {
+        //     console.log(path);
+        //     if(paineis.maquinas) return 'maquinas';
+        //     if(paineis.produtividade) return 'produtividade';
 
-            return 'paradas';
+        //     return 'paradas';
+        // }
+
+        if(path.includes('performanceMaquinas')) {
+            // if(paineis.maquinas) return 'maquinas';
+            // if(paineis.produtividade) return 'produtividade';
+
+            return 'performanceMaquinas';
         }
     }
 };
