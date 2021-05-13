@@ -13,7 +13,7 @@ var ultimaAtualizacao;
 
 var turnoAtualVar;
 // const ip = "http://idw.tutiplast.com.br:8080";
-const ip = "http://170.10.0.203:8090";
+const ip = "http://170.10.0.210:8080";
 
 var count = 0;
 var atualGlobal;
@@ -109,7 +109,11 @@ router
                pts = pts_;
             }
          }
-
+         pts = pts.sort(function(a, b) {
+            return (a.cdPt.toLowerCase() < b.cdPt.toLowerCase()) ? -1 : (a.cdPt.toLowerCase() > b.cdPt.toLowerCase()) ? 1 : 0;
+         });
+         
+         // console.log(pts)
          // *PRODUTIVIDADE
          
          var today = new Date();
@@ -149,7 +153,7 @@ router
 
                   contador++;
                   response.status(200).render('performanceMaquinas', { 
-                     pts: pts, 
+                     pts: pts.sort(), 
                      secondsTransition: request.session.cfg.tempo_trans, 
                      cor_fundo: request.session.cfg.cor_fundo, 
                      nextPage: panel.switch(request.baseUrl, request.session.paineis), 
