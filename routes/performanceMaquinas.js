@@ -153,7 +153,7 @@ router
 
                   contador++;
                   response.status(200).render('performanceMaquinas', { 
-                     pts: pts.sort(), 
+                     pts: pts, 
                      secondsTransition: request.session.cfg.tempo_trans, 
                      cor_fundo: request.session.cfg.cor_fundo, 
                      nextPage: panel.switch(request.baseUrl, request.session.paineis), 
