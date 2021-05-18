@@ -29,18 +29,18 @@
             <% pts.forEach((pt) => { %>
                 <div class="row align-wrapper flex" id=circle1>
                     <div class="item flex-item-1 grow0" >
-                        <i class="material-icons" style='color: <%= pt.icone.caminhoIcone %>; text-align: justify'>lens</i>
+                        <i class="material-icons" style='color: <%= pt.icone.caminhoIcone %>; text-align: justify; margin-right: 30px'>lens</i>
                     </div>
                     <div class="item flex-item-1 grow0">
-                        <i class="material-icons" style='color: <%= pt.icone.corTriangulo %>; text-align: justify'>lens</i>
+                        <i class="material-icons" style='color: <%= pt.icone.corTriangulo %>; text-align: justify; margin-right: 50px'>lens</i>
                     </div>
-                    <div class="item flex-item-1" style="color: <%= pt.icone.caminhoIcone %>; text-align: justify; margin-left: 50px">
+                    <div class="item info flex-item-1" style="color: <%= pt.icone.caminhoIcone %>; text-align: justify">
                         <%= pt.cdPt %>
                     </div>
-                    <div class="item flex-item-1" style="color: <%= pt.icone.caminhoIcone %>; text-align: justify">
+                    <div class="item info flex-item-1" style="color: <%= pt.icone.caminhoIcone %>; text-align: justify; ">
                         <%= pt.indicadores.indiceProdutividadeOEE %>%
                     </div>
-                    <div class="item flex-item-1 descricao" style="color: <%= pt.icone.caminhoIcone %>; text-align: justify">
+                    <div class="item info flex-item-1 descricao" style="color: <%= pt.icone.caminhoIcone %>; text-align: justify">
                         <%= pt.dsProduto %>
                     </div>
                 </div>
