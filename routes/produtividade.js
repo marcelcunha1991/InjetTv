@@ -84,21 +84,38 @@ function getToday(){
                        
                         console.log("Chamada original "  + velocimetro.data);
 
-                        response.status(200).render('produtividade', {
-                            velocimetro: velocimetro.data,
-                            bi: bi.data,
-                            turnos: turnos.data.turnos,
-                            galpao : request.session.cfg.dsGt,
-                            secondsTransition: request.session.cfg.tempo_trans,
-                            cor_fundo: request.session.cfg.cor_fundo,
-                            nextPage: panel.switch(request.baseUrl, request.session.paineis),
-                            logo: logo.hasLogo(),
-                            ultimaAtualizacao : getToday()
-                        });
-
-                        
-                       
-                        
+                        // VERIFICANDO QUAL EMPRESA, SE EMPRESA DE ID 307, NO CASO DECATEC, MOSTRA VIEW DIFERENTE
+                        axios.get(`${process.env.API_URL}/idw/rest/injet/monitorizacao/idempresa`)
+                        .then(idEmpresa => {
+                            console.log('idEmpresa');
+                            console.log(idEmpresa.data);
+                            if (idEmpresa.data === 307) {
+                                response.status(200).render('decatecCustomizacao/produtividade', {
+                                    velocimetro: velocimetro.data,
+                                    bi: bi.data,
+                                    turnos: turnos.data.turnos,
+                                    galpao : request.session.cfg.dsGt,
+                                    secondsTransition: request.session.cfg.tempo_trans,
+                                    cor_fundo: request.session.cfg.cor_fundo,
+                                    nextPage: panel.switch(request.baseUrl, request.session.paineis),
+                                    logo: logo.hasLogo(),
+                                    ultimaAtualizacao : getToday()
+                                });
+                            } else {
+                                response.status(200).render('produtividade', {
+                                    velocimetro: velocimetro.data,
+                                    bi: bi.data,
+                                    turnos: turnos.data.turnos,
+                                    galpao : request.session.cfg.dsGt,
+                                    secondsTransition: request.session.cfg.tempo_trans,
+                                    cor_fundo: request.session.cfg.cor_fundo,
+                                    nextPage: panel.switch(request.baseUrl, request.session.paineis),
+                                    logo: logo.hasLogo(),
+                                    ultimaAtualizacao : getToday()
+                                });
+                            }
+                        })
+                        .catch(error => response.status(500).send('Erro ao identificar a empresa. Tente novamente mais tarde. ' + error));
                     }))
                     .catch(errorBI => response.status(500).render('error', {error: json.stringify(errorBI)}));
                 })
