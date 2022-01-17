@@ -90,7 +90,7 @@ function getToday(){
                             console.log('idEmpresa');
                             console.log(idEmpresa.data);
                             if (idEmpresa.data === 307) {
-                                response.status(200).render('decatecCustomizacao/produtividade', {
+                                response.status(200).render('decatecCustomizacao/produtividadeDecatec', {
                                     velocimetro: velocimetro.data,
                                     bi: bi.data,
                                     turnos: turnos.data.turnos,

@@ -105,7 +105,7 @@ router
                 console.log('idEmpresa');
                 console.log(idEmpresa.data);
                 if (idEmpresa.data === 307) {
-                    response.status(200).render('decatecCustomizacao/maquinas', { 
+                    response.status(200).render('decatecCustomizacao/maquinasDecatec', { 
                         pts: pts, 
                         secondsTransition: request.session.cfg.tempo_trans, 
                         cor_fundo: request.session.cfg.cor_fundo, 
